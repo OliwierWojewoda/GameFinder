@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "hKTuwNZhB8zNw3Hw8Seu6YyI44n3/OhFxVcqhk7MejV7FIXQawFREepfjeTrm13BW6WHoti5wTFAU0285SPZMw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dami0\\source\\repos\\GameFinder\\source\\GameFinder.Application\\GameFinder.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dami0\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\dami0\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
+    "C:\\Users\\dami0\\.nuget\\packages\\mediatr\\12.0.1\\mediatr.12.0.1.nupkg.sha512",
+    "C:\\Users\\dami0\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\dami0\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

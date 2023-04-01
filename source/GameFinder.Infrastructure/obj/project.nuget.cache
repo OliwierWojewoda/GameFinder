@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vbu8avW6Ntsg6DzE4EPI6GK/i23gi6OcJlnMGfw7KJ+CPFvlLQj2lIcA7mNvQENtTNFMPJA3JnlwABnamnD6RQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dami0\\source\\repos\\GameFinder\\source\\GameFinder.Infrastructure\\GameFinder.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dami0\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
