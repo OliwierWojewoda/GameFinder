@@ -22,3 +22,10 @@ C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\obj\Debu
 C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\obj\Debug\net7.0\refint\GameFinder.Infrastructure.dll
 C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\obj\Debug\net7.0\GameFinder.Infrastructure.pdb
 C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\obj\Debug\net7.0\ref\GameFinder.Infrastructure.dll
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\bin\Debug\net7.0\GameFinder.Infrastructure.runtimeconfig.json
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\bin\Debug\net7.0\GameFinder.Application.dll
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\bin\Debug\net7.0\GameFinder.Domain.dll
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\bin\Debug\net7.0\GameFinder.Application.pdb
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\bin\Debug\net7.0\GameFinder.Domain.pdb
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\obj\Debug\net7.0\GameFinder.Infrastructure.csproj.CopyComplete
+C:\Users\dami0\source\repos\GameFinder\source\GameFinder.Infrastructure\obj\Debug\net7.0\GameFinder.Infrastructure.genruntimeconfig.cache
