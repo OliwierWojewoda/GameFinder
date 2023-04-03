@@ -12,6 +12,6 @@ namespace GameFinder.Domain.Entities
         [Key]
         public int Sport_Id { get; set; }
 
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 }

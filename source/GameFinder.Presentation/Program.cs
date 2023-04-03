@@ -1,9 +1,14 @@
+using GameFinder.Application;
+using GameFinder.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddInfrastructure();
+builder.Services.AddApplication();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

@@ -22,18 +22,24 @@ namespace GameFinder.Infrastructure.Persistance
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseInMemoryDatabase(databaseName: "Production_Database");
+                .UseSqlServer("Server=DESKTOP-2UA5DVQ;Database=GameFinderDb;Trusted_Connection=True;");
 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Role>()
                 .HasData(
                 new Role() { Role_Id = 1, Name = "Player" },
                 new Role() { Role_Id = 2, Name = "Admin" });
+
+            modelBuilder.Entity<Sport>()
+                .HasData(
+                new Sport { Sport_Id = 1, Name = "Soccer"},
+                new Sport { Sport_Id = 2, Name = "Basketball"},
+                new Sport { Sport_Id = 3, Name = "Volleyball"},
+                new Sport { Sport_Id = 4, Name = "Tennis" });
         }
     }
 }

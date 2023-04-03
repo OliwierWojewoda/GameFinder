@@ -17,6 +17,7 @@ namespace GameFinder.Infrastructure
             services.AddDbContext<ApplicationDbContext>();
             services.AddScoped<IDbContext,ApplicationDbContext>();
             
+
             return services;
         }
     }
