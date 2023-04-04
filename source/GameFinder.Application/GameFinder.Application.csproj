@@ -16,4 +16,8 @@
     <ProjectReference Include="..\GameFinder.Domain\GameFinder.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Cities\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -10,8 +10,16 @@ namespace GameFinder.Domain.Entities
     public class Court
     {
         [Key]
-        public int Court_Id { get; set; }
+        public int Court_Id { get; private set; }
 
-        public int City_Id { get; set; }
+        public int City_Id { get; private set; }
+
+        public static Court New(int city_Id)
+        {
+            return new Court()
+            {
+                City_Id = city_Id
+            };
+        }
     }
 }
