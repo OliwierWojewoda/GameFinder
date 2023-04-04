@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameFinder.Application.Features.Courts.Handlers
 {
-    internal sealed class CreateCourtCommandHandler : IRequestHandler<CreateCourtCommand>
+    public class CreateCourtCommandHandler : IRequestHandler<CreateCourtCommand,int>
     {
         private readonly IDbContext _dbContext;
 
@@ -19,12 +19,14 @@ namespace GameFinder.Application.Features.Courts.Handlers
             _dbContext = dbContext;
         }
 
-        public async Task Handle(CreateCourtCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateCourtCommand request, CancellationToken cancellationToken)
         {
             var newCourt = Court.New(request.city_Id);
 
-            await _dbContext.Court.AddAsync(newCourt);
+            var result = await _dbContext.Court.AddAsync(newCourt);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return result.Entity.Court_Id;
         }
     }
 }

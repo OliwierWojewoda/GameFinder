@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace GameFinder.Application.Features.Courts.Commands
 {
-    public record CreateCourtCommand(int city_Id) : IRequest;
+    public record CreateCourtCommand(int city_Id) : IRequest<int>;
  
 }
