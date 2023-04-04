@@ -11,7 +11,7 @@ namespace GameFinder.Infrastructure.Persistance
 {
     public class ApplicationDbContext : DbContext, IDbContext
     {
-        public DbSet<City> City { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Court> Court { get; set; }
         public DbSet<Game> Game { get; set; }
         public DbSet<Game_Details> Game_Details { get; set; }

@@ -12,14 +12,16 @@ namespace GameFinder.Domain.Entities
         [Key]
         public int Court_Id { get; private set; }
 
-        public int City_Id { get; private set; }
-
-        public static Court New(int city_Id)
+        public int Address_Id { get; private set; }
+        
+        private Court(int addressId)
         {
-            return new Court()
-            {
-                City_Id = city_Id
-            };
+            Address_Id = addressId;
         }
+        /// <summary>
+        /// Create new instance of Court entity
+        /// </summary>
+        /// <param name="addressId"></param>
+        public static Court New(int addressId) => new Court(addressId);
     }
 }

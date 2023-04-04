@@ -10,7 +10,7 @@ namespace GameFinder.Application.Data
 {
     public interface IDbContext
     {
-        DbSet<City> City { get; set; }
+        DbSet<Address> Address { get; set; }
         DbSet<Court> Court { get; set; }
         DbSet<Game> Game { get; set; }
         DbSet<Game_Details> Game_Details { get; set; }
