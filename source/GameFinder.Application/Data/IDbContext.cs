@@ -13,7 +13,7 @@ namespace GameFinder.Application.Data
         DbSet<Address> Address { get; set; }
         DbSet<Court> Court { get; set; }
         DbSet<Game> Game { get; set; }
-        DbSet<Game_Details> Game_Details { get; set; }
+        DbSet<GameDetails> Game_Details { get; set; }
         DbSet<Role> Role { get; set; }
         DbSet<Sport> Sport { get; set; }
         DbSet<User> User { get; set; }

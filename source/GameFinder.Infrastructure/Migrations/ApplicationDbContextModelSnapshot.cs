@@ -24,17 +24,17 @@ namespace GameFinder.Infrastructure.Migrations
 
             modelBuilder.Entity("GameFinder.Domain.Entities.Address", b =>
                 {
-                    b.Property<int>("Address_Id")
+                    b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Address_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Postal_Code")
+                    b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -42,146 +42,160 @@ namespace GameFinder.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Address_Id");
+                    b.HasKey("AddressId");
 
                     b.ToTable("Address");
                 });
 
             modelBuilder.Entity("GameFinder.Domain.Entities.Court", b =>
                 {
-                    b.Property<int>("Court_Id")
+                    b.Property<int>("CourtId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Court_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourtId"), 1L, 1);
 
-                    b.Property<int>("Address_Id")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.HasKey("Court_Id");
+                    b.Property<string>("CourtType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CourtId");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Court");
                 });
 
             modelBuilder.Entity("GameFinder.Domain.Entities.Game", b =>
                 {
-                    b.Property<int>("Game_Id")
+                    b.Property<int>("GameId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Game_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"), 1L, 1);
 
-                    b.Property<int>("Court_Id")
+                    b.Property<int>("CourtId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Precicted_End")
+                    b.Property<DateTime>("PrecictedEnd")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Sport_Id")
+                    b.Property<int>("SportId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Game_Id");
+                    b.HasKey("GameId");
+
+                    b.HasIndex("CourtId");
+
+                    b.HasIndex("SportId");
 
                     b.ToTable("Game");
                 });
 
-            modelBuilder.Entity("GameFinder.Domain.Entities.Game_Details", b =>
+            modelBuilder.Entity("GameFinder.Domain.Entities.GameDetails", b =>
                 {
-                    b.Property<int>("Game_Details_Id")
+                    b.Property<int>("GameDetailsId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Game_Details_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameDetailsId"), 1L, 1);
 
-                    b.Property<int>("Game_Id")
+                    b.Property<int>("GameId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_Id")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Game_Details_Id");
+                    b.HasKey("GameDetailsId");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Game_Details");
                 });
 
             modelBuilder.Entity("GameFinder.Domain.Entities.Role", b =>
                 {
-                    b.Property<int>("Role_Id")
+                    b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Role_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Role_Id");
+                    b.HasKey("RoleId");
 
                     b.ToTable("Role");
 
                     b.HasData(
                         new
                         {
-                            Role_Id = 1,
+                            RoleId = 1,
                             Name = "Player"
                         },
                         new
                         {
-                            Role_Id = 2,
-                            Name = "Admin"
+                            RoleId = 2,
+                            Name = "Administrator"
                         });
                 });
 
             modelBuilder.Entity("GameFinder.Domain.Entities.Sport", b =>
                 {
-                    b.Property<int>("Sport_Id")
+                    b.Property<int>("SportId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Sport_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SportId"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Sport_Id");
+                    b.HasKey("SportId");
 
                     b.ToTable("Sport");
 
                     b.HasData(
                         new
                         {
-                            Sport_Id = 1,
+                            SportId = 1,
                             Name = "Soccer"
                         },
                         new
                         {
-                            Sport_Id = 2,
+                            SportId = 2,
                             Name = "Basketball"
                         },
                         new
                         {
-                            Sport_Id = 3,
+                            SportId = 3,
                             Name = "Volleyball"
                         },
                         new
                         {
-                            Sport_Id = 4,
+                            SportId = 4,
                             Name = "Tennis"
                         });
                 });
 
             modelBuilder.Entity("GameFinder.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("User_Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("User_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
@@ -194,7 +208,7 @@ namespace GameFinder.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password_Hash")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -202,16 +216,78 @@ namespace GameFinder.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role_Id")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("User_Id");
+                    b.HasKey("UserId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("GameFinder.Domain.Entities.Court", b =>
+                {
+                    b.HasOne("GameFinder.Domain.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("GameFinder.Domain.Entities.Game", b =>
+                {
+                    b.HasOne("GameFinder.Domain.Entities.Court", "Court")
+                        .WithMany()
+                        .HasForeignKey("CourtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameFinder.Domain.Entities.Sport", "Sport")
+                        .WithMany()
+                        .HasForeignKey("SportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Court");
+
+                    b.Navigation("Sport");
+                });
+
+            modelBuilder.Entity("GameFinder.Domain.Entities.GameDetails", b =>
+                {
+                    b.HasOne("GameFinder.Domain.Entities.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GameFinder.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GameFinder.Domain.Entities.User", b =>
+                {
+                    b.HasOne("GameFinder.Domain.Entities.Role", "RoleRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RoleRole");
                 });
 #pragma warning restore 612, 618
         }

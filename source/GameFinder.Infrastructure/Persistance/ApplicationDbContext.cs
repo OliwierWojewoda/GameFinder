@@ -14,7 +14,7 @@ namespace GameFinder.Infrastructure.Persistance
         public DbSet<Address> Address { get; set; }
         public DbSet<Court> Court { get; set; }
         public DbSet<Game> Game { get; set; }
-        public DbSet<Game_Details> Game_Details { get; set; }
+        public DbSet<GameDetails> Game_Details { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Sport> Sport { get; set; }
         public DbSet<User> User { get; set; }
@@ -31,15 +31,15 @@ namespace GameFinder.Infrastructure.Persistance
 
             modelBuilder.Entity<Role>()
                 .HasData(
-                new Role() { Role_Id = 1, Name = "Player" },
-                new Role() { Role_Id = 2, Name = "Admin" });
+                new Role(1, "Player"),    
+                new Role(2, "Administrator"));
 
             modelBuilder.Entity<Sport>()
                 .HasData(
-                new Sport { Sport_Id = 1, Name = "Soccer"},
-                new Sport { Sport_Id = 2, Name = "Basketball"},
-                new Sport { Sport_Id = 3, Name = "Volleyball"},
-                new Sport { Sport_Id = 4, Name = "Tennis" });
+                new Sport(1, "Soccer"),
+                new Sport(2, "Basketball"),
+                new Sport(3, "Volleyball"),
+                new Sport(4, "Tennis"));
         }
     }
 }

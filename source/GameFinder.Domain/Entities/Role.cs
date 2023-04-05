@@ -10,8 +10,14 @@ namespace GameFinder.Domain.Entities
     public class Role
     {
         [Key]
-        public int Role_Id { get; set; }
+        public int RoleId { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
+
+        public Role(int roleId, string name)
+        {
+            RoleId = roleId;
+            Name = name;
+        }
     }
 }

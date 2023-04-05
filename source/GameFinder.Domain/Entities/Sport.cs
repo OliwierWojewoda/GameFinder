@@ -10,8 +10,14 @@ namespace GameFinder.Domain.Entities
     public class Sport
     {
         [Key]
-        public int Sport_Id { get; set; }
+        public int SportId { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
+
+        public Sport(int sportId, string name)
+        {
+            SportId = sportId;
+            Name = name;
+        }
     }
 }

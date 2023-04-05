@@ -10,18 +10,24 @@ namespace GameFinder.Domain.Entities
     public class Court
     {
         [Key]
-        public int Court_Id { get; private set; }
+        public int CourtId { get; private set; }
 
-        public int Address_Id { get; private set; }
-        
-        private Court(int addressId)
+        public int AddressId { get; private set; }
+
+        public virtual Address Address { get; private set; }
+
+        public string CourtType {  get; private set; }
+
+
+        private Court(int addressId, string courtType)
         {
-            Address_Id = addressId;
+            AddressId = addressId;
+            CourtType = courtType;
         }
         /// <summary>
         /// Create new instance of Court entity
         /// </summary>
         /// <param name="addressId"></param>
-        public static Court New(int addressId) => new Court(addressId);
+        public static Court New(int addressId, string courtType) => new Court(addressId,courtType);
     }
 }

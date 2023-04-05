@@ -1,4 +1,5 @@
 ﻿using GameFinder.Application.Data;
+using GameFinder.Application.Models;
 using GameFinder.Domain.Entities;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameFinder.Application.Features.Courts.Commands
 {
-    public record CreateCourtCommand(int addressId) : IRequest<int>;
+    public record CreateCourtCommand(NewCourtDto newCourtDto) : IRequest<int>;
 
 
     public class CreateCourtCommandHandler : IRequestHandler<CreateCourtCommand, int>
@@ -23,12 +24,18 @@ namespace GameFinder.Application.Features.Courts.Commands
 
         public async Task<int> Handle(CreateCourtCommand request, CancellationToken cancellationToken)
         {
-            var newCourt = Court.New(request.addressId);
+            var address = Address.New(
+                request.newCourtDto.City,
+                request.newCourtDto.Street,
+                request.newCourtDto.Postal_Code);
+            await _dbContext.Address.AddAsync(address);
+
+            var newCourt = Court.New(address.AddressId, request.newCourtDto.CourtType);
 
             var result = await _dbContext.Court.AddAsync(newCourt);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return result.Entity.Court_Id;
+            return result.Entity.CourtId;
         }
     }
 
