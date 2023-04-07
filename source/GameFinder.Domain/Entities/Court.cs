@@ -19,15 +19,21 @@ namespace GameFinder.Domain.Entities
         public string CourtType {  get; private set; }
 
 
-        private Court(int addressId, string courtType)
+        private Court(string courtType)
         {
-            AddressId = addressId;
-            CourtType = courtType;
+            CourtType = courtType;       
         }
         /// <summary>
         /// Create new instance of Court entity
         /// </summary>
         /// <param name="addressId"></param>
-        public static Court New(int addressId, string courtType) => new Court(addressId,courtType);
+        public static Court New(string courtType, Address address)
+        {
+            var result =  new Court(courtType);
+            result.SetAddress(address);
+            return result;
+        }
+
+        public void SetAddress(Address address) => Address = address;
     }
 }

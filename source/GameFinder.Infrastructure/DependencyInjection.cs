@@ -1,5 +1,7 @@
 ﻿using GameFinder.Application.Data;
+using GameFinder.Domain.Repositories;
 using GameFinder.Infrastructure.Persistance;
+using GameFinder.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace GameFinder.Infrastructure
         {
             services.AddDbContext<ApplicationDbContext>();
             services.AddScoped<IDbContext,ApplicationDbContext>();
-            
+            services.AddScoped<ICourtRepository, CourtRepository>();
 
             return services;
         }
