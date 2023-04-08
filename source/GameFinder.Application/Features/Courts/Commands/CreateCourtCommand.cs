@@ -1,6 +1,6 @@
-﻿using GameFinder.Application.Data;
-using GameFinder.Application.Models;
+﻿using GameFinder.Application.Models;
 using GameFinder.Domain.Entities;
+using GameFinder.Domain.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -15,11 +15,11 @@ namespace GameFinder.Application.Features.Courts.Commands
 
     public class CreateCourtCommandHandler : IRequestHandler<CreateCourtCommand, int>
     {
-        private readonly IDbContext _dbContext;
+        private readonly ICourtRepository _courtRepository;
 
-        public CreateCourtCommandHandler(IDbContext dbContext)
+        public CreateCourtCommandHandler(ICourtRepository courtRepository)
         {
-            _dbContext = dbContext;
+            _courtRepository = courtRepository;
         }
 
         public async Task<int> Handle(CreateCourtCommand request, CancellationToken cancellationToken)
@@ -28,14 +28,14 @@ namespace GameFinder.Application.Features.Courts.Commands
                 request.newCourtDto.City,
                 request.newCourtDto.Street,
                 request.newCourtDto.Postal_Code);
-            await _dbContext.Address.AddAsync(address);
 
-            var newCourt = Court.New(address.AddressId, request.newCourtDto.CourtType);
+            var newCourt = Court.New(request.newCourtDto.CourtType, address);
 
-            var result = await _dbContext.Court.AddAsync(newCourt);
-            await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return result.Entity.CourtId;
+            var result = await _courtRepository.CourtAddAsync(newCourt);
+            await _courtRepository.SaveChangesAsync(cancellationToken);
+
+            return result;
         }
     }
 
