@@ -1,4 +1,5 @@
 using GameFinder.Application;
+using GameFinder.Application.Features.UserService;
 using GameFinder.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

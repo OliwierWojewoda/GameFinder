@@ -22,7 +22,7 @@ namespace GameFinder.Infrastructure.Persistance
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer("Server=DESKTOP-2UA5DVQ;Database=GameFinderDb;Trusted_Connection=True;");
+                .UseSqlServer("server=KOMPUTER-PC;database=GameFinder;trusted_connection=true;Encrypt=False;Trust Server Certificate=true");
 
         }
 
