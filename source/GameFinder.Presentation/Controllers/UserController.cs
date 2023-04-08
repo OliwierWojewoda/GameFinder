@@ -22,5 +22,10 @@ namespace GameFinder.Presentation.Controllers
         {  
             return Ok(await _service.Register(newUser));
         }
+        [HttpPost("/Login")]
+        public async Task<ActionResult<User>> Login(LoginUserDto user)
+        {
+            return Ok(await _service.Login(user));
+        }
     }
 }

@@ -34,11 +34,25 @@ namespace GameFinder.Application.Features.UserService
                 Email = newUser.Email,
                 PasswordHash = passwordHash,
                 Phone = newUser.Phone,
-                RoleId = newUser.RoleId
+                RoleId = newUser.RoleId,
+                PasswordSalt = passwordSalt
             };
             await _context.User.AddAsync(user);
             await _context.SaveChangesAsync();
             return await _context.User.ToListAsync();
+        }
+        public async Task<User> Login(LoginUserDto user)
+        {
+            User loggedUser = await _context.User.FirstOrDefaultAsync(x => x.Email == user.Email);
+            if (loggedUser == null)
+            {
+                throw new Exception("No user with this email");
+            }
+            if(!VerifyPasswordHash(user.Password,loggedUser.PasswordHash,loggedUser.PasswordSalt))
+            {
+                throw new Exception("Wrong Password");
+            }
+            return loggedUser;
         }
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -48,5 +62,14 @@ namespace GameFinder.Application.Features.UserService
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
+        }
+        }
     }
-}
+
