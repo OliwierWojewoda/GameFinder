@@ -43,12 +43,10 @@ namespace GameFinder.Application.Features.UserService
         }
         public async Task<User> Login(LoginUserDto user)
         {
-            User loggedUser = await _context.User.FirstOrDefaultAsync(x => x.Email == user.Email);
-            if (loggedUser == null)
-            {
-                throw new Exception("No user with this email");
-            }
-            if(!VerifyPasswordHash(user.Password,loggedUser.PasswordHash,loggedUser.PasswordSalt))
+            User loggedUser = await _context.User.FirstOrDefaultAsync(x => x.Email == user.Email)
+                ?? throw new Exception("No user with this email");
+
+            if (!VerifyPasswordHash(user.Password,loggedUser.PasswordHash,loggedUser.PasswordSalt))
             {
                 throw new Exception("Wrong Password");
             }
