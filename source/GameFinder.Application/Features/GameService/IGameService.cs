@@ -11,5 +11,7 @@ namespace GameFinder.Application.Features.GameService
     public interface IGameService
     {
         Task<Game> AddGame(NewGameDto newgame);
+        Task<List<Game>> GetAllGames();
+        Task<List<Game>> GetAllGamesFromCourt(int courtId);
     }
 }

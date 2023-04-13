@@ -1,6 +1,7 @@
 ﻿using GameFinder.Application.Data;
 using GameFinder.Application.Models;
 using GameFinder.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,14 @@ namespace GameFinder.Application.Features.GameService
             await _context.Game.AddAsync(game);
             await _context.SaveChangesAsync();
             return game;
+        }
+        public async Task<List<Game>> GetAllGames()
+        { 
+            return await _context.Game.ToListAsync();
+        }
+        public async Task<List<Game>> GetAllGamesFromCourt(int courtId)
+        {
+            return await _context.Game.Where(x => x.CourtId == courtId).ToListAsync();
         }
     }
 }
