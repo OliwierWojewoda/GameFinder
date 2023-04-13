@@ -27,5 +27,10 @@ namespace GameFinder.Presentation.Controllers
         {
             return Ok(await _service.Login(user));
         }
+        [HttpGet("/GetAllUsers")]
+        public async Task<ActionResult<User>> GetAllUsers()
+        {
+            return Ok(await _service.GetAllUsers());
+        }
     }
 }

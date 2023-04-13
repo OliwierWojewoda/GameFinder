@@ -12,5 +12,6 @@ namespace GameFinder.Application.Features.UserService
     {
         Task<List<User>> Register(NewUserDto newUser);
         Task<User> Login(LoginUserDto user);
+        Task<List<User>> GetAllUsers();
     }
 }

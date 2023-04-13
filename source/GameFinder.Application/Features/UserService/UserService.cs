@@ -52,6 +52,11 @@ namespace GameFinder.Application.Features.UserService
             }
             return loggedUser;
         }
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _context.User.ToListAsync();
+        }
+
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
