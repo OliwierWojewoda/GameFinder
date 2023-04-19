@@ -1,0 +1,42 @@
+﻿using GameFinder.Application.Data;
+using GameFinder.Application.Models;
+using GameFinder.Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GameFinder.Application.Features.GameService.Commands
+{
+    public record AddGameCommand(NewGameDto newGameDto) : IRequest<int>;
+
+
+    public class AddGameCommandHandler : IRequestHandler<AddGameCommand,int>
+    {
+        private readonly IDbContext _dbContext;
+
+        public AddGameCommandHandler(IDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public async Task<int> Handle(AddGameCommand request, CancellationToken cancellationToken)
+        {
+            var newGame = new Game(
+                request.newGameDto.SportId,
+                request.newGameDto.Start,
+                request.newGameDto.PrecictedEnd,
+                request.newGameDto.CourtId);
+
+            await _dbContext.Game.AddAsync(newGame);
+            await _dbContext.SaveChangesAsync();
+            return newGame.GameId;
+            
+        }
+
+       
+    }
+}

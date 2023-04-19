@@ -10,15 +10,21 @@ namespace GameFinder.Domain.Entities
     public class Game
     {
         [Key]
-        public int GameId { get;  set; }
+        public int GameId { get; private set; }
 
-        public int SportId { get;  set; }
-        public virtual Sport Sport { get;  set; }
-        public DateTime Start { get;  set; }
-        public DateTime PrecictedEnd { get;  set; }
-        public int CourtId { get;  set; }
-        public virtual Court Court { get;  set; }
+        public int SportId { get; private set; }
+        public virtual Sport Sport { get; private set; }
+        public DateTime Start { get; private set; }
+        public DateTime PrecictedEnd { get; private set; }
+        public int CourtId { get; private set; }
+        public virtual Court Court { get; private set; }
 
-        
+        public Game(int sportId, DateTime start, DateTime precictedEnd, int courtId)
+        {
+            SportId = sportId;
+            Start = start;
+            PrecictedEnd = precictedEnd;
+            CourtId = courtId;
+        }
     }
 }
