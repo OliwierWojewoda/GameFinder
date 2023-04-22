@@ -13,6 +13,7 @@ namespace GameFinder.Domain.Repositories
         Task<Game> GetGameById(int id);
         Task<bool> DeleteGame(Game gameToDelete);
         Task<List<Game>> GetAllGames();
+        Task<List<Game>> GetAllGamesFromCourt(int courtId);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
