@@ -13,7 +13,6 @@ builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IGameService, GameService>();
 
 var app = builder.Build();
 

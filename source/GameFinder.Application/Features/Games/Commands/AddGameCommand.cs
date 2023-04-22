@@ -33,10 +33,7 @@ namespace GameFinder.Application.Features.GameService.Commands
 
             await _dbContext.Game.AddAsync(newGame);
             await _dbContext.SaveChangesAsync();
-            return newGame.GameId;
-            
-        }
-
-       
+            return newGame.GameId;           
+        }      
     }
 }
