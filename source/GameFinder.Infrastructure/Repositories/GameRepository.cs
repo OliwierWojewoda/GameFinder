@@ -18,6 +18,11 @@ namespace GameFinder.Infrastructure.Repositories
         {
             _dbContext = applicationDbContext;
         }
+        public async Task<List<Game>> GetAllGames()
+        {
+            var result = await _dbContext.Game.ToListAsync();
+            return result;
+        }
 
         public async Task<int> AddGame(Game newGame)
         {

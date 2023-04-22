@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 namespace GameFinder.Application.Features.GameService.Commands
 {
     public record AddGameCommand(NewGameDto newGameDto) : IRequest<int>;
-
-
     public class AddGameCommandHandler : IRequestHandler<AddGameCommand,int>
     {
         private readonly IDbContext _dbContext;

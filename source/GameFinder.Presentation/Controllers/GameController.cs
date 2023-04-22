@@ -20,7 +20,12 @@ namespace GameFinder.Presentation.Controllers
         {
             _mediator = mediator;
         }
-
+        [HttpGet("/GetAllGames")]
+        public async Task<IActionResult> GetAllGames([FromQuery] GetAllGamesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
         [HttpPost("/AddGame")]
         public async Task<IActionResult> AddGame([FromBody] AddGameCommand command)
         {
