@@ -10,6 +10,8 @@ namespace GameFinder.Domain.Repositories
     public interface ICourtRepository
     {
         Task<int> CourtAddAsync(Court newCourt);
+        Task<Court> GetCourtById(int id);
+        Task<bool> Delete(Court courtToDelete);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

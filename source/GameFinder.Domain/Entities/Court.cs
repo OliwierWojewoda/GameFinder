@@ -16,6 +16,8 @@ namespace GameFinder.Domain.Entities
 
         public virtual Address Address { get; private set; }
 
+        public virtual List<Game>? Games { get; private set; }
+
         public string CourtType {  get; private set; }
 
 
@@ -24,7 +26,7 @@ namespace GameFinder.Domain.Entities
             CourtType = courtType;       
         }
         /// <summary>
-        /// Create new instance of Court entity
+        /// Create new instance of Court
         /// </summary>
         /// <param name="addressId"></param>
         public static Court New(string courtType, Address address)
@@ -35,5 +37,7 @@ namespace GameFinder.Domain.Entities
         }
 
         public void SetAddress(Address address) => Address = address;
+
+        public bool HasGames() => Games != null || Games.Count != 0;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GameFinder.Domain.Entities;
 using GameFinder.Domain.Repositories;
 using GameFinder.Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,17 @@ namespace GameFinder.Infrastructure.Repositories
         {
             var result = await _dbContext.Court.AddAsync(newCourt);
             return result.Entity.CourtId;
+        }
+
+        public async Task<bool> Delete(Court courtToDelete)
+        {
+            _dbContext.Court.Remove(courtToDelete);
+            return await Task.FromResult(true);
+        }
+
+        public async Task<Court> GetCourtById(int id)
+        {
+            return  await _dbContext.Court.FirstOrDefaultAsync(court => court.CourtId == id);
         }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
