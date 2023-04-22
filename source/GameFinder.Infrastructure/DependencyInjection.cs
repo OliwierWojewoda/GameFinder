@@ -19,7 +19,7 @@ namespace GameFinder.Infrastructure
             services.AddDbContext<ApplicationDbContext>();
             services.AddScoped<IDbContext,ApplicationDbContext>();
             services.AddScoped<ICourtRepository, CourtRepository>();
-
+            services.AddScoped<IGameRepository, GameRepository>();
             return services;
         }
     }

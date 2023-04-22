@@ -25,7 +25,7 @@ namespace GameFinder.Application.Features.Courts.Commands
             if (courtToDelete == null) throw new ArgumentNullException("There is no court with given id!");
             if (courtToDelete.HasGames()) throw new GamesOnCourtException();
             var result = await _courtRepository.Delete(courtToDelete);
-            _courtRepository.SaveChangesAsync(cancellationToken);
+            await _courtRepository.SaveChangesAsync(cancellationToken);
             return result;
         }
     }
