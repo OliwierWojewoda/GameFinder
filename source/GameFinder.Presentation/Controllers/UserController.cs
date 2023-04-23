@@ -1,7 +1,11 @@
 ﻿using GameFinder.Application.Features.Courts.Commands;
+using GameFinder.Application.Features.Games.Commands;
+using GameFinder.Application.Features.GameService.Commands;
+using GameFinder.Application.Features.Users.Commands;
 using GameFinder.Application.Features.UserService;
 using GameFinder.Application.Models;
 using GameFinder.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -12,25 +16,19 @@ namespace GameFinder.Presentation.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _service;
-        public UserController(IUserService service)
+
+        private readonly IMediator _mediator;
+
+        public UserController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
         }
         [HttpPost("/Register")]
-        public async Task<ActionResult<List<User>>> Register(NewUserDto newUser)
-        {  
-            return Ok(await _service.Register(newUser));
-        }
-        [HttpPost("/Login")]
-        public async Task<ActionResult<User>> Login(LoginUserDto user)
+        public async Task<IActionResult> Register([FromBody] RegisterCommand command)
         {
-            return Ok(await _service.Login(user));
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
-        [HttpGet("/GetAllUsers")]
-        public async Task<ActionResult<User>> GetAllUsers()
-        {
-            return Ok(await _service.GetAllUsers());
-        }
+      
     }
 }

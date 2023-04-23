@@ -20,6 +20,7 @@ namespace GameFinder.Infrastructure
             services.AddScoped<IDbContext,ApplicationDbContext>();
             services.AddScoped<ICourtRepository, CourtRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
     }
