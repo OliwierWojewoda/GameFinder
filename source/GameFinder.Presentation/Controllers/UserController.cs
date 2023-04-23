@@ -34,5 +34,11 @@ namespace GameFinder.Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpGet("/GetAllUsers")]
+        public async Task<IActionResult> Login([FromQuery] GetAllUsersCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

@@ -42,9 +42,10 @@ namespace GameFinder.Infrastructure.Repositories
             var result = await _dbContext.User.FirstOrDefaultAsync(x =>x.Email==user.Email);
             return result;
         }
-        //public async Task<List<User>> GetAllUsers()
-        //{
-            
-        //}
+        public async Task<List<User>> GetAllUsers()
+        {
+            var result = await _dbContext.User.ToListAsync();
+            return result;
+        }
     }
 }
