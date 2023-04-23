@@ -2,7 +2,6 @@
 using GameFinder.Application.Features.Games.Commands;
 using GameFinder.Application.Features.GameService.Commands;
 using GameFinder.Application.Features.Users.Commands;
-using GameFinder.Application.Features.UserService;
 using GameFinder.Application.Models;
 using GameFinder.Domain.Entities;
 using MediatR;
@@ -29,6 +28,11 @@ namespace GameFinder.Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-      
+        [HttpPost("/Login")]
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

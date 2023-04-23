@@ -1,6 +1,5 @@
 using GameFinder.Application;
 using GameFinder.Application.Features.GameService;
-using GameFinder.Application.Features.UserService;
 using GameFinder.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);

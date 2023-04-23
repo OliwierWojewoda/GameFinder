@@ -29,14 +29,19 @@ namespace GameFinder.Infrastructure.Repositories
             var existingUser = await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);
             return existingUser == null ? false : true;
         }
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);          
+        }
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.SaveChangesAsync(cancellationToken);
         }
-        //public async Task<User> Login(User user)
-        //{
-
-        //}
+        public async Task<User> Login(User user)
+        {
+            var result = await _dbContext.User.FirstOrDefaultAsync(x =>x.Email==user.Email);
+            return result;
+        }
         //public async Task<List<User>> GetAllUsers()
         //{
             
