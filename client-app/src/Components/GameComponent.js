@@ -1,4 +1,4 @@
-
+import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import { useEffect, useState } from "react";
  
@@ -15,8 +15,6 @@ const [PredictedEnd, setPredictedEnd] = useState("");
   async function Load() {
     const result = await axios.get("https://localhost:7124/GetAllGames");
     setGame(result.data);
-    console.log(result.data);
-    console.log(gameId)
   }
   // async function save(event) {
   
@@ -83,7 +81,7 @@ const [PredictedEnd, setPredictedEnd] = useState("");
       <div>
         <h1>Games</h1>
       
-      <table class="table table-dark" align="center">
+      <Table striped bordered hover variant="dark" align="center">
         <thead>
           <tr>
             <th scope="col">Game Id</th>
@@ -97,7 +95,7 @@ const [PredictedEnd, setPredictedEnd] = useState("");
           return (
             <tbody>
               <tr>
-                <th scope="row">{game.gameId} </th>
+                <td>{game.gameId} </td>
                 <td>{game.sportId}</td>
                 <td>{game.start}</td>     
                 <td>{game.precictedEnd}</td> 
@@ -106,7 +104,7 @@ const [PredictedEnd, setPredictedEnd] = useState("");
             </tbody>
           );
         })}
-      </table>
+      </Table>
         
       </div>
     );
