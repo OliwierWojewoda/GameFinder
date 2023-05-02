@@ -97,8 +97,8 @@ const [PredictedEnd, setPredictedEnd] = useState("");
               <tr>
                 <td>{game.gameId} </td>
                 <td>{game.sportId}</td>
-                <td>{game.start}</td>     
-                <td>{game.precictedEnd}</td> 
+                <td>{game.start.slice(0,16).replace('T',' ')}</td>     
+                <td>{game.precictedEnd.slice(0,16).replace('T',' ')}</td> 
                 <td>{game.courtId}</td>                     
               </tr>
             </tbody>
