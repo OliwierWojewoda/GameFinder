@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import GameComponent from './Components/GameComponent';
+import GameComponent from './Components/Home/GameComponent';
 import NavbarComponent from './Components/Nav/Navbar';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Route, Routes} from "react-router-dom";
