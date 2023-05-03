@@ -37,7 +37,8 @@ function Register() {
     }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <div className="m-3">
+    <Form onSubmit={handleSubmit} >
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Email address</Form.Label>
         <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter email" />
@@ -71,6 +72,7 @@ function Register() {
         Submit
       </Button>
     </Form>
+    </div>
   );
 }
 

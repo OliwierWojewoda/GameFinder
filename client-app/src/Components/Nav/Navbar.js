@@ -32,15 +32,15 @@ export default function NavbarComponent() {
             />
             <Button variant="outline-success">Search</Button>
           </Form>
-        </Navbar.Collapse>
-        <Nav
-            className="me-auto my-2 my-lg-0"
+          <Nav
+            className=""
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
         <Nav.Link as={Link} to="/register">Register</Nav.Link>
         <Nav.Link as={Link} to="/login">Login</Nav.Link>
         </Nav>
+        </Navbar.Collapse>   
       </Container>
     </Navbar>
   );
