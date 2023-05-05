@@ -9,16 +9,20 @@ import Card from 'react-bootstrap/Card';
 
 function GameComponent() {
   const [games, setGame] = useState([]);
-  const [gameId, setgameId] = useState("");
-  const [sportId, setsportId] = useState("");
-  const [start, setStart] = useState("");
-  const [courtId, setCourtId] = useState("");
-  const [PredictedEnd, setPredictedEnd] = useState("");
+  const [postalCode, setpostalCode] = useState('');
+  const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
   const paths = {
     '1': require('../Images/1.jpg'),
     '2': require('../Images/2.jpg'),
     '3': require('../Images/3.jpg'),
     '4': require('../Images/4.jpg'),
+  }
+  const [addresses, setAddresses] = useState([]);
+  async function FindAddress(courtIdToFind){
+    const result = await axios.get("https://localhost:7124/GetAddress"
+    , { params: { courtId: courtIdToFind } });
+    return result.data
   }
   useEffect(() => {
     (async () => await Load())();
@@ -26,6 +30,9 @@ function GameComponent() {
   async function Load() {
     const result = await axios.get("https://localhost:7124/GetAllGames");
     setGame(result.data);
+    const addressesres = await Promise.all(result.data.map(game => FindAddress(game.courtId)));
+    console.log(await Promise.all(result.data.map(game => FindAddress(game.courtId))))
+    setAddresses(addressesres);
   }
   return (
     <div>
@@ -43,7 +50,7 @@ function GameComponent() {
         </DropdownButton>
       </Stack>
       <div>
-            {games.map(function fn(game) {
+      {games.map((game,index) => {
           return (
             <Card className="text-center mb-2">
             <Card.Header>{game.start.slice(0,16).replace('T',' ')}</Card.Header>
@@ -53,7 +60,9 @@ function GameComponent() {
         <Card.Text> jest 15 ludzi </Card.Text>
         <Button variant="primary">Zapisz się</Button>
         </div>
-        <Card.Text> {game.courtId} adresssssssssssssss </Card.Text>    
+        <div>       
+        <Card.Text>{addresses[index] && `${addresses[index].city}, ${addresses[index].street}, ${addresses[index].postalCode}`}</Card.Text>    
+        </div>
       </Card.Body> 
       </Card>
           );
