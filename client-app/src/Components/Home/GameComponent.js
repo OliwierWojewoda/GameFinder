@@ -14,6 +14,12 @@ function GameComponent() {
   const [start, setStart] = useState("");
   const [courtId, setCourtId] = useState("");
   const [PredictedEnd, setPredictedEnd] = useState("");
+  const paths = {
+    '1': require('../Images/1.jpg'),
+    '2': require('../Images/2.jpg'),
+    '3': require('../Images/3.jpg'),
+    '4': require('../Images/4.jpg'),
+  }
   useEffect(() => {
     (async () => await Load())();
   }, []);
@@ -41,13 +47,13 @@ function GameComponent() {
           return (
             <Card className="text-center mb-2">
             <Card.Header>{game.start.slice(0,16).replace('T',' ')}</Card.Header>
-      <Card.Body className="d-flex flex-row justify-content-around align-items-center">
-        <Card.Text >{game.sportId} id sportu</Card.Text>
+      <Card.Body className="d-flex flex-row justify-content-between align-items-center">
+        <Card.Text ><img src={paths[game.sportId]} alt="Italian Trulli" width="150" height="150" ></img></Card.Text>
         <div className='d-flex flex-column justify-content-around'>
         <Card.Text> jest 15 ludzi </Card.Text>
         <Button variant="primary">Zapisz się</Button>
         </div>
-        <Card.Text> {game.courtId} adres </Card.Text>    
+        <Card.Text> {game.courtId} adresssssssssssssss </Card.Text>    
       </Card.Body> 
       </Card>
           );
