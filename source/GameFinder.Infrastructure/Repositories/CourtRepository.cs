@@ -41,5 +41,9 @@ namespace GameFinder.Infrastructure.Repositories
         {
             return await _dbContext.SaveChangesAsync(cancellationToken);
         }
+        public async Task<List<Court>> GetAllCourts()
+        {
+            return await _dbContext.Court.Include(x=> x.Address).ToListAsync();
+        }
     }
 }
