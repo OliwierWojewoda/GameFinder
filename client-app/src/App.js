@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
-
+import GameComponent from './Components/Home/GameComponent';
+import NavbarComponent from './Components/Nav/Navbar';
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Route, Routes} from "react-router-dom";
+import Register from './Components/Auth/Register';
+import Login from './Components/Auth/Login';
+import UsersListComponent from './Components/UsersList/UsersListComponent';
+import RankingComponent from './Components/Rankings/Rankings'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavbarComponent></NavbarComponent>
+      <div className="container">
+       <Routes>
+        <Route path="/" element={<GameComponent></GameComponent>}/>
+        <Route path="Rankings" element={<RankingComponent></RankingComponent>}/>
+        <Route path="Users" element={<UsersListComponent></UsersListComponent>}/>
+        <Route path="Register" element={<Register></Register>}/>
+        <Route path="Login" element={<Login></Login>}/>
+       </Routes> 
+      </div>    
     </div>
   );
 }
