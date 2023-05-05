@@ -34,7 +34,7 @@ namespace GameFinder.Infrastructure.Repositories
 
         public async Task<Court> GetCourtById(int id)
         {
-            return  await _dbContext.Court.FirstOrDefaultAsync(court => court.CourtId == id);
+            return await _dbContext.Court.Include(x => x.Address).FirstOrDefaultAsync(court => court.CourtId == id);
         }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

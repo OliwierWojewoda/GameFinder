@@ -1,4 +1,5 @@
 ﻿using GameFinder.Application.Features.Courts.Commands;
+using GameFinder.Application.Features.Games.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +25,12 @@ namespace GameFinder.Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        
+        [HttpGet("/GetCourt")]
+        public async Task<IActionResult> GetCourt([FromQuery] GetCourtCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpPost("/AddCourt")]
         public async Task<IActionResult> AddCourt([FromBody] CreateCourtCommand command)
