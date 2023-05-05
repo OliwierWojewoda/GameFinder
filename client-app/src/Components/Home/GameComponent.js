@@ -60,8 +60,16 @@ function GameComponent() {
         <Card.Text> jest 15 ludzi </Card.Text>
         <Button variant="primary">Zapisz się</Button>
         </div>
-        <div>       
-        <Card.Text>{addresses[index] && `${addresses[index].city}, ${addresses[index].street}, ${addresses[index].postalCode}`}</Card.Text>    
+        <div className='m-5'>       
+        <Card.Text>
+          {addresses[index] && `${addresses[index].city}`} 
+        </Card.Text> 
+        <Card.Text>
+          {addresses[index] && `${addresses[index].postalCode}`} 
+        </Card.Text>  
+        <Card.Text>
+          {addresses[index] && `${addresses[index].street}`} 
+        </Card.Text>     
         </div>
       </Card.Body> 
       </Card>
