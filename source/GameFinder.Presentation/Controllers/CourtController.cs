@@ -31,6 +31,12 @@ namespace GameFinder.Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpGet("/GetAddress")]
+        public async Task<IActionResult> GetAddress([FromQuery] GetAddressCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpPost("/AddCourt")]
         public async Task<IActionResult> AddCourt([FromBody] CreateCourtCommand command)
