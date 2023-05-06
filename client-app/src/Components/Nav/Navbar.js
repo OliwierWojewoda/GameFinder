@@ -22,6 +22,7 @@ export default function NavbarComponent() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/rankings">Rankings</Nav.Link>
             <Nav.Link as={Link} to="/users">Players</Nav.Link>
+            <Nav.Link as={Link} to="/addgame">Create game</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

@@ -1,4 +1,3 @@
-import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -9,9 +8,6 @@ import Card from 'react-bootstrap/Card';
 
 function GameComponent() {
   const [games, setGame] = useState([]);
-  const [postalCode, setpostalCode] = useState('');
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
   const paths = {
     '1': require('../Images/1.jpg'),
     '2': require('../Images/2.jpg'),
