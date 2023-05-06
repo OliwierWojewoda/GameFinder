@@ -8,7 +8,8 @@ import Register from './Components/Auth/Register';
 import Login from './Components/Auth/Login';
 import UsersListComponent from './Components/UsersList/UsersListComponent';
 import RankingComponent from './Components/Rankings/Rankings'
-import Addgame from './Components/AddGame/AddGame';
+import Addgame from './Components/Adding/AddGame';
+import AddCourt from './Components/Adding/AddCourt';
 function App() {
   return (
     <div className="App">
@@ -20,7 +21,8 @@ function App() {
         <Route path="Users" element={<UsersListComponent></UsersListComponent>}/>
         <Route path="Register" element={<Register></Register>}/>
         <Route path="Login" element={<Login></Login>}/>
-        <Route path="Addgame" element={<Addgame></Addgame>}/>
+        <Route path="AddGame" element={<Addgame></Addgame>}/>
+        <Route path="AddCourt" element={<AddCourt></AddCourt>}/>
        </Routes> 
       </div>    
     </div>

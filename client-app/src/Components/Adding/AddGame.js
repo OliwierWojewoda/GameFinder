@@ -35,15 +35,15 @@ function Addgame() {
     <Form onSubmit={handleSubmit} >
       <Form.Group className="mb-3" controlId="start">
         <Form.Label>Start</Form.Label>
-        <Form.Control value={start} onChange={(e) => setStart(e.target.value)} type="date" placeholder="Enter email" />
+        <Form.Control value={start} onChange={(e) => setStart(e.target.value)} type="date" placeholder="Start" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="predictedEnd">
         <Form.Label>Predicted End</Form.Label>
-        <Form.Control value={predictedEnd} onChange={(e) => setPredictedEnd(e.target.value)} type="date" placeholder="Password" />
+        <Form.Control value={predictedEnd} onChange={(e) => setPredictedEnd(e.target.value)} type="date" placeholder="End" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="courtId">
         <Form.Label>Court</Form.Label>
-        <Form.Control value={courtId} onChange={(e) => setCourtId(e.target.value)} type="number" placeholder="Password" />
+        <Form.Control value={courtId} onChange={(e) => setCourtId(e.target.value)} type="number" placeholder="Court" />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Select Sport</Form.Label>
