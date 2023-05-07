@@ -7,7 +7,7 @@ import axios from "axios";
 function AddCourt() {
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
-    const [postal_Code, setPostal_Code] = useState('');
+    const [postalCode, setPostalCode] = useState('');
     const [courtType, setCourtType] = useState('');
     const handleSubmit = async (e) => {
         try{
@@ -16,14 +16,13 @@ function AddCourt() {
                 newCourtDto: {
                     city: city,
                     street: street,
-                    postal_Code: postal_Code,
+                    postalCode: postalCode,
                     courtType: courtType,
                 }},
                 {
                     headers: { 'Content-Type': 'application/json' }
                 }              
-            ); 
-           await console.log(response); 
+            );  
         }        
         catch(error){
             console.log(error);
@@ -33,19 +32,19 @@ function AddCourt() {
   return (
     <div className="m-3">
     <Form onSubmit={handleSubmit} >
-      <Form.Group className="mb-3" controlId="start">
+      <Form.Group className="mb-3" controlId="city">
         <Form.Label>City</Form.Label>
         <Form.Control value={city} onChange={(e) => setCity(e.target.value)} type="text" placeholder="City" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="predictedEnd">
+      <Form.Group className="mb-3" controlId="postalCode">
         <Form.Label>Postal Code</Form.Label>
-        <Form.Control value={postal_Code} onChange={(e) => setPostal_Code(e.target.value)} type="text" placeholder="Postal Code" />
+        <Form.Control value={postalCode} onChange={(e) => setPostalCode(e.target.value)} type="text" placeholder="Postal Code" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="courtId">
+      <Form.Group className="mb-3" controlId="street">
         <Form.Label>Street</Form.Label>
         <Form.Control value={street} onChange={(e) => setStreet(e.target.value)} type="text" placeholder="Street" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="courtId">
+      <Form.Group className="mb-3" controlId="courtType">
         <Form.Label>Court Type</Form.Label>
         <Form.Control value={courtType} onChange={(e) => setCourtType(e.target.value)} type="text" placeholder="Court Type" />
       </Form.Group>   

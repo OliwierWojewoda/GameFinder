@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import GameComponent from './Components/Home/GameComponent';
 import NavbarComponent from './Components/Nav/Navbar';

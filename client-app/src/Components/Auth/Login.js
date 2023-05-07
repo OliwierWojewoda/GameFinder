@@ -1,8 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useRef, useState, useEffect } from "react";
+import {useState} from "react";
 import axios from "axios";
-
 
 function Login() {
     const [password, setPwd] = useState('');
@@ -19,7 +18,6 @@ function Login() {
                     headers: { 'Content-Type': 'application/json' }
                 }              
             ); 
-           await console.log(response); 
         }        
         catch(error){
             console.log(error);
@@ -28,12 +26,12 @@ function Login() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="email">
         <Form.Label>Email address</Form.Label>
         <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter email" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
         <Form.Control value={password} onChange={(e) => setPwd(e.target.value)} type="password" placeholder="Password" />
       </Form.Group>

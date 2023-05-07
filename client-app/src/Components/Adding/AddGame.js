@@ -16,14 +16,13 @@ function Addgame() {
                 newGameDto: {
                     sportId: sportId,
                     start: start,
-                    precictedEnd: predictedEnd,
+                    predictedEnd: predictedEnd,
                     courtId: courtId,
                 }},
                 {
                     headers: { 'Content-Type': 'application/json' }
                 }              
             ); 
-           await console.log(response); 
         }        
         catch(error){
             console.log(error);
@@ -45,7 +44,7 @@ function Addgame() {
         <Form.Label>Court</Form.Label>
         <Form.Control value={courtId} onChange={(e) => setCourtId(e.target.value)} type="number" placeholder="Court" />
       </Form.Group>
-      <Form.Group className="mb-3">
+      <Form.Group className="mb-3" controlId="sport">
         <Form.Label>Select Sport</Form.Label>
         <Form.Select onChange={(e) => setSportId(e.target.value)}>
           <option value="1">Soccer</option>

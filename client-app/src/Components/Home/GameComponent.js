@@ -15,21 +15,24 @@ function GameComponent() {
     '4': require('../Images/4.jpg'),
   }
   const [addresses, setAddresses] = useState([]);
+
   async function FindAddress(courtIdToFind){
     const result = await axios.get("https://localhost:7124/GetAddress"
     , { params: { courtId: courtIdToFind } });
     return result.data
   }
+
   useEffect(() => {
     (async () => await Load())();
   }, []);
+
   async function Load() {
     const result = await axios.get("https://localhost:7124/GetAllGames");
     setGame(result.data);
     const addressesres = await Promise.all(result.data.map(game => FindAddress(game.courtId)));
-    console.log(await Promise.all(result.data.map(game => FindAddress(game.courtId))))
     setAddresses(addressesres);
   }
+
   return (
     <div>
       <h1 className='m-2'>Upcoming Games</h1>
@@ -51,7 +54,7 @@ function GameComponent() {
             <Card className="text-center mb-2">
             <Card.Header>{game.start.slice(0,16).replace('T',' ')}</Card.Header>
       <Card.Body className="d-flex flex-row justify-content-between align-items-center">
-        <Card.Text ><img src={paths[game.sportId]} alt="Italian Trulli" width="150" height="150" ></img></Card.Text>
+        <Card.Text ><img src={paths[game.sportId]} alt="sport logo" width="150" height="150" ></img></Card.Text>
         <div className='d-flex flex-column justify-content-around'>
         <Card.Text> jest 15 ludzi </Card.Text>
         <Button variant="primary">Zapisz się</Button>
