@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 
 export default function NavbarComponent() {
@@ -22,6 +22,8 @@ export default function NavbarComponent() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/rankings">Rankings</Nav.Link>
             <Nav.Link as={Link} to="/users">Players</Nav.Link>
+            <Nav.Link as={Link} to="/addgame">Create game</Nav.Link>
+            <Nav.Link as={Link} to="/addcourt">Add Court</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

@@ -1,8 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useRef, useState, useEffect } from "react";
+import {useState} from "react";
 import axios from "axios";
-
 
 function Register() {
     const [password, setPwd] = useState('');
@@ -29,7 +28,6 @@ function Register() {
                     headers: { 'Content-Type': 'application/json' }
                 }              
             ); 
-           await console.log(response); 
         }        
         catch(error){
             console.log(error);
