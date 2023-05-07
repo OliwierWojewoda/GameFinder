@@ -13,7 +13,7 @@ namespace GameFinder.Application.Models
 
         public string Street { get;  set; }
 
-        public string Postal_Code { get;  set; }
+        public string PostalCode { get;  set; }
 
         public string CourtType { get; set; }
 

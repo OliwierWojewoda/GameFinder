@@ -27,7 +27,7 @@ namespace GameFinder.Application.Features.Courts.Commands
             var address = Address.New(
                 request.newCourtDto.City,
                 request.newCourtDto.Street,
-                request.newCourtDto.Postal_Code);
+                request.newCourtDto.PostalCode);
 
             var newCourt = Court.New(request.newCourtDto.CourtType, address);
 

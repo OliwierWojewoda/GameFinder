@@ -12,7 +12,7 @@ namespace GameFinder.Application.Models
 
         public int SportId { get;  set; }
         public DateTime Start { get;  set; }
-        public DateTime PrecictedEnd { get;  set; }
+        public DateTime PredictedEnd { get;  set; }
         public int CourtId { get;  set; }
     }
 }

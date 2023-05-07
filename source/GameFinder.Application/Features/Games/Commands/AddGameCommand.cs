@@ -26,7 +26,7 @@ namespace GameFinder.Application.Features.GameService.Commands
             var newGame = new Game(
                 request.newGameDto.SportId,
                 request.newGameDto.Start,
-                request.newGameDto.PrecictedEnd,
+                request.newGameDto.PredictedEnd,
                 request.newGameDto.CourtId);
 
             await _dbContext.Game.AddAsync(newGame);
