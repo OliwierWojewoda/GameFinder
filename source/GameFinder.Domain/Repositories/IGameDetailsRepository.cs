@@ -15,5 +15,6 @@ namespace GameFinder.Domain.Repositories
         Task<List<GameDetails>> GetAllGameUsers(int gameId);
         Task<List<GameDetails>> GetAllUsersInAllGame();
         Task<List<GameDetails>> GetAllUserGames(int userId);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
