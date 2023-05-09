@@ -15,10 +15,16 @@ function GameComponent() {
     '4': require('../Images/4.jpg'),
   }
   const [addresses, setAddresses] = useState([]);
+  const [gameDetails, setgameDetails] = useState([]);
 
   async function FindAddress(courtIdToFind){
     const result = await axios.get("https://localhost:7124/GetAddress"
     , { params: { courtId: courtIdToFind } });
+    return result.data
+  }
+  async function GetGameDetails(gameDetailsToFind){
+    const result = await axios.get("https://localhost:7124/GetAllGameUsers"
+    , { params: { gameId: gameDetailsToFind } });
     return result.data
   }
 
@@ -30,7 +36,10 @@ function GameComponent() {
     const result = await axios.get("https://localhost:7124/GetAllGames");
     setGame(result.data);
     const addressesres = await Promise.all(result.data.map(game => FindAddress(game.courtId)));
+    const gameDetailsres = await Promise.all(result.data.map(game => GetGameDetails(game.gameId)));
+    console.log(Promise.all(result.data.map(game => GetGameDetails(game.gameId))));
     setAddresses(addressesres);
+    setgameDetails(gameDetailsres);
   }
 
   return (
@@ -52,11 +61,12 @@ function GameComponent() {
       {games.map((game,index) => {
           return (
             <Card className="text-center mb-2">
-            <Card.Header>{game.start.slice(0,16).replace('T',' ')}</Card.Header>
+            <Card.Header>{game.start.slice(0,10)}</Card.Header>
       <Card.Body className="d-flex flex-row justify-content-between align-items-center">
         <Card.Text ><img src={paths[game.sportId]} alt="sport logo" width="150" height="150" ></img></Card.Text>
         <div className='d-flex flex-column justify-content-around'>
-        <Card.Text> jest 15 ludzi </Card.Text>
+        <Card.Header>{game.start.slice(10,16).replace('T',' ')} - {game.predictedEnd.slice(10,16).replace('T',' ')} </Card.Header>
+        <Card.Text>Users participating: {gameDetails[index] && `${gameDetails[index].length}`} </Card.Text>
         <Button variant="primary">Zapisz się</Button>
         </div>
         <div className='m-5'>       
