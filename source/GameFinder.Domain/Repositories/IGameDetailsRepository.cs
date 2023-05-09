@@ -14,5 +14,6 @@ namespace GameFinder.Domain.Repositories
         Task<GameDetails> GetGameDetails(int gameId, int userId);
         Task<List<GameDetails>> GetAllGameUsers(int gameId);
         Task<List<GameDetails>> GetAllUsersInAllGame();
+        Task<List<GameDetails>> GetAllUserGames(int userId);
     }
 }

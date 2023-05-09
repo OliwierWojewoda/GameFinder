@@ -23,18 +23,18 @@ namespace GameFinder.Presentation.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        //[HttpGet("/GetAllUserGames")]
-        //public async Task<IActionResult> GetAllUserGames([FromQuery] GetAllUserGamesCommand command)
-        //{
-        //    var result = await _mediator.Send(command);
-        //    return Ok(result);
-        //}
-        //[HttpGet("/GetAllGameUsers")]
-        //public async Task<IActionResult> GetAllGameUsers([FromBody] GetAllGameUsersCommand command)
-        //{
-        //    var result = await _mediator.Send(command);
-        //    return Ok(result);
-        //}
+        [HttpGet("/GetAllUserGames")]
+        public async Task<IActionResult> GetAllUserGames([FromQuery] GetAllUserGamesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpGet("/GetAllGameUsers")]
+        public async Task<IActionResult> GetAllGameUsers([FromQuery] GetAllGameUsersCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
         //[HttpDelete("/DeleteUserFromGame")]
         //public async Task<IActionResult> DeleteGame([FromBody] DeleteUserFromGameCommand command)
         //{
