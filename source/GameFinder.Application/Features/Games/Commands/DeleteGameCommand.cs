@@ -11,11 +11,11 @@ namespace GameFinder.Application.Features.Games.Commands
 {
     public record DeleteGameCommand(int gameId) : IRequest<bool>;
 
-    public class DeleteCourtCommandHandler : IRequestHandler<DeleteGameCommand, bool>
+    public class DeleteGameCommandHandler : IRequestHandler<DeleteGameCommand, bool>
     {
         private readonly IGameRepository _gameRepository;
 
-        public DeleteCourtCommandHandler(IGameRepository gameRepository)
+        public DeleteGameCommandHandler(IGameRepository gameRepository)
         {
             _gameRepository = gameRepository;
         }

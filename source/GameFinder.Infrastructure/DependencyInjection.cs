@@ -21,6 +21,7 @@ namespace GameFinder.Infrastructure
             services.AddScoped<ICourtRepository, CourtRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGameDetailsRepository, GameDetailsRepository>();
             return services;
         }
     }
