@@ -6,6 +6,7 @@ import axios from "axios";
 function Login() {
     const [password, setPwd] = useState('');
     const [email, setEmail] = useState('');
+    const [userDetails, setUserDetails] = useState([]);
     const handleSubmit = async (e) => {
         try{
             const response = await axios.post('https://localhost:7124/Login',
@@ -18,11 +19,15 @@ function Login() {
                     headers: { 'Content-Type': 'application/json' }
                 }              
             ); 
-            localStorage.setItem('token', JSON.stringify(response.data));
+            const token = JSON.stringify(response.data.token);
+            const userId = JSON.stringify(response.data.userId);
+      
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', userId);
         }        
         catch(error){
             console.log(error);
-        }
+        }     
     }
 
   return (

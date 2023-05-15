@@ -16,7 +16,8 @@ function GameComponent() {
   }
   const [addresses, setAddresses] = useState([]);
   const [gameDetails, setgameDetails] = useState([]);
-
+  const token = JSON.parse(localStorage.getItem('token'));
+  
   async function FindAddress(courtIdToFind){
     const result = await axios.get("https://localhost:7124/GetAddress"
     , { params: { courtId: courtIdToFind } });
@@ -27,7 +28,26 @@ function GameComponent() {
     , { params: { gameId: gameDetailsToFind } });
     return result.data
   }
-
+  async function JoinToGame(gameId){
+    try{
+        const response = await axios.post('https://localhost:7124/AddUserToGame',
+        {
+          newGameDetailsDto: {
+            userId: JSON.parse(localStorage.getItem('userId')),
+            gameId: gameId
+            }},
+            {
+              headers: {
+             'Content-Type': 'application/json',
+              'Authorization' : `Bearer ${token}`}
+          }             
+        ); 
+    }        
+    catch(error){
+        console.log(error);
+    }
+}
+  
   useEffect(() => {
     (async () => await Load())();
   }, []);
@@ -67,7 +87,7 @@ function GameComponent() {
         <div className='d-flex flex-column justify-content-around'>
         <Card.Header>{game.start.slice(10,16).replace('T',' ')} - {game.predictedEnd.slice(10,16).replace('T',' ')} </Card.Header>
         <Card.Text>Users participating: {gameDetails[index] && `${gameDetails[index].length}`} </Card.Text>
-        <Button variant="primary">Zapisz się</Button>
+        <Button onClick={(e)=> {JoinToGame(game.gameId)}} variant="primary">Zapisz się</Button>
         </div>
         <div className='m-5'>       
         <Card.Text>
