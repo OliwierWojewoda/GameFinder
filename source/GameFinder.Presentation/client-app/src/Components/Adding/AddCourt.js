@@ -9,8 +9,10 @@ function AddCourt() {
     const [street, setStreet] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [courtType, setCourtType] = useState('');
+    const token = JSON.parse(localStorage.getItem('token'));
     const handleSubmit = async (e) => {
         try{
+           console.log(token)
             const response = await axios.post('https://localhost:7124/AddCourt',
             {
                 newCourtDto: {
@@ -20,8 +22,10 @@ function AddCourt() {
                     courtType: courtType,
                 }},
                 {
-                    headers: { 'Content-Type': 'application/json' }
-                }              
+                    headers: {
+                   'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`}
+                }                     
             );  
         }        
         catch(error){

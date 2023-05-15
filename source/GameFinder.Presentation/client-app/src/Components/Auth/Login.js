@@ -18,6 +18,7 @@ function Login() {
                     headers: { 'Content-Type': 'application/json' }
                 }              
             ); 
+            localStorage.setItem('token', JSON.stringify(response.data));
         }        
         catch(error){
             console.log(error);
