@@ -18,8 +18,8 @@ using System.Threading.Tasks;
 namespace GameFinder.Application.Features.Users.Commands
 {
     
-    public record LoginCommand(LoginUserDto user) : IRequest<string>;
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
+    public record LoginCommand(LoginUserDto user) : IRequest<LoggedUserDto>;
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, LoggedUserDto>
     {
         private readonly IUserRepository _userRepository;
         private IConfiguration _config;
@@ -30,16 +30,20 @@ namespace GameFinder.Application.Features.Users.Commands
             _config = config;
         }
 
-        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoggedUserDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             User loggedUser = await _userRepository.GetUserByEmail(request.user.Email)
             ?? throw new Exception("No user with this email");
             if (!VerifyPasswordHash(request.user.Password, loggedUser.PasswordHash, loggedUser.PasswordSalt))
             {
                 throw new Exception("Wrong Password");
-            }
-            var token = Generate(loggedUser);
-            return token;
+            }      
+            LoggedUserDto response = new LoggedUserDto
+            {
+                Token = Generate(loggedUser),
+                UserId = loggedUser.UserId
+            };
+            return response;
         }
 
         private string Generate(User loggedUser)
