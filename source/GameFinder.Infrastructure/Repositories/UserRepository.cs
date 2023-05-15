@@ -31,7 +31,7 @@ namespace GameFinder.Infrastructure.Repositories
         }
         public async Task<User> GetUserByEmail(string email)
         {
-            return await _dbContext.User.FirstOrDefaultAsync(x => x.Email == email);          
+            return await _dbContext.User.Include(user => user.RoleRole).FirstOrDefaultAsync(x => x.Email == email);          
         }
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

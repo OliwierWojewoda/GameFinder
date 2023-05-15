@@ -1,6 +1,7 @@
 ﻿using GameFinder.Application.Features.Courts.Commands;
 using GameFinder.Application.Features.Games.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace GameFinder.Presentation.Controllers
         {
             _mediator = mediator;
         }
+        
         [HttpGet("/GetAllCourts")]
+        [Authorize]
         public async Task<IActionResult> GetAllCourts([FromQuery] GetAllCourtsCommand command)
         {
             var result = await _mediator.Send(command);
