@@ -4,6 +4,7 @@ using GameFinder.Application.Features.GameDetails.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameFinder.Presentation.Controllers
 {
@@ -42,6 +43,7 @@ namespace GameFinder.Presentation.Controllers
             return Ok(result);
         }
         [HttpPost("/AddUserToGame")]
+        [Authorize]
         public async Task<IActionResult> AddUserToGame([FromBody] AddUserToGameCommand command)
         {
             var result = await _mediator.Send(command);

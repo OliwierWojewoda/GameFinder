@@ -1,6 +1,7 @@
 ﻿using GameFinder.Application.Data;
 using GameFinder.Application.Models;
 using GameFinder.Domain.Entities;
+using GameFinder.Domain.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ namespace GameFinder.Application.Features.GameDetails.Commands
     public record AddUserToGameCommand(NewGameDetailsDto newGameDetailsDto) : IRequest<int>;
     public class AddUserToGameCommandHandler : IRequestHandler<AddUserToGameCommand, int>
     {
-        private readonly IDbContext _dbContext;
+        private readonly IGameDetailsRepository _gameDetailsRepository;
 
-        public AddUserToGameCommandHandler(IDbContext dbContext)
+        public AddUserToGameCommandHandler(IGameDetailsRepository gameDetailsRepository)
         {
-            _dbContext = dbContext;
+            _gameDetailsRepository = gameDetailsRepository;
         }
 
         public async Task<int> Handle(AddUserToGameCommand request, CancellationToken cancellationToken)
@@ -25,9 +26,12 @@ namespace GameFinder.Application.Features.GameDetails.Commands
             var newGameDetails = new Domain.Entities.GameDetails(
                 request.newGameDetailsDto.GameId,
                 request.newGameDetailsDto.UserId);
-
-            await _dbContext.Game_Details.AddAsync(newGameDetails);
-            await _dbContext.SaveChangesAsync();
+            if(await _gameDetailsRepository.GetGameDetails(newGameDetails.GameId,newGameDetails.UserId) != null)
+            {
+                throw new Exception("User already in this game");
+            };           
+            await _gameDetailsRepository.AddUserToGame(newGameDetails);
+            await _gameDetailsRepository.SaveChangesAsync();
             return newGameDetails.GameDetailsId;
         }
     }
