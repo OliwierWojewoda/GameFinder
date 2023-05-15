@@ -22,7 +22,6 @@ namespace GameFinder.Presentation.Controllers
         }
         
         [HttpGet("/GetAllCourts")]
-        [Authorize]
         public async Task<IActionResult> GetAllCourts([FromQuery] GetAllCourtsCommand command)
         {
             var result = await _mediator.Send(command);
@@ -42,6 +41,7 @@ namespace GameFinder.Presentation.Controllers
         }
 
         [HttpPost("/AddCourt")]
+        [Authorize]
         public async Task<IActionResult> AddCourt([FromBody] CreateCourtCommand command)
         {
             var result = await _mediator.Send(command);
