@@ -25,3 +25,16 @@ Application created to help find games in your city.
 9. Dodawanie usuwanie boisk i miast(D)
 (jak są jakies gry na boisku to nie mozna go usunąc)
 10. Sport zrób Seed (D)
+- zrobić redirecty
+- zrobić komunikaty dla usera 
+- homepage zrobić filtorwanie po miescie i grze
+- sortowania
+- search bar
+- rankingi i statystki jakies wymyslic
+- walidacja przy tworzeniu gier i poprawic wybieranie godziny
+- walidacja przy tworzeniu boiska
+- wybor boiska przy tworzeniu gry 
+- mozliwosc wyjscia z gry
+- znalezac jakies inne zdj dla gier
+- zrobic jakis panel dla admina
+- pomyslec zeby users participating zmienialo sie przy dolaczeniu
