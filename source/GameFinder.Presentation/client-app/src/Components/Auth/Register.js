@@ -2,8 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+    const navigate = useNavigate();
     const [password, setPwd] = useState('');
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -12,6 +14,7 @@ function Register() {
     const [birthdate, setBirthDate] = useState('');
     const [role, setRole] = useState('');
     const handleSubmit = async (e) => {
+      e.preventDefault();
         try{
             const response = await axios.post('https://localhost:7124/Register',
             {
@@ -26,8 +29,9 @@ function Register() {
                 }},
                 {
                     headers: { 'Content-Type': 'application/json' }
-                }              
+                }                 
             ); 
+            navigate("/login");
         }        
         catch(error){
             console.log(error);

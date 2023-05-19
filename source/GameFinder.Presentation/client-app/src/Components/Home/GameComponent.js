@@ -5,8 +5,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from "react-router-dom";
 
 function GameComponent() {
+  const navigate = useNavigate();
   const [games, setGame] = useState([]);
   const paths = {
     '1': require('../Images/1.jpg'),
@@ -29,6 +31,10 @@ function GameComponent() {
     return result.data
   }
   async function JoinToGame(gameId){
+    if(token==null){
+      navigate("/login");
+      throw new Error('Token is null'); 
+    }
     try{
         const response = await axios.post('https://localhost:7124/AddUserToGame',
         {

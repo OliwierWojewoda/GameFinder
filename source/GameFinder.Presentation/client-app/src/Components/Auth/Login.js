@@ -2,12 +2,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [password, setPwd] = useState('');
     const [email, setEmail] = useState('');
     const [userDetails, setUserDetails] = useState([]);
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
+      e.preventDefault();
         try{
             const response = await axios.post('https://localhost:7124/Login',
             {
@@ -24,6 +27,8 @@ function Login() {
       
             localStorage.setItem('token', token);
             localStorage.setItem('userId', userId);
+
+            navigate("/")
         }        
         catch(error){
             console.log(error);
