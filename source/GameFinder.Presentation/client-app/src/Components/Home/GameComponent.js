@@ -19,23 +19,23 @@ function GameComponent() {
   const [addresses, setAddresses] = useState([]);
   const [gameDetails, setgameDetails] = useState([]);
   const token = JSON.parse(localStorage.getItem('token'));
-  
-  async function FindAddress(courtIdToFind){
+
+  async function FindAddress(courtIdToFind) {
     const result = await axios.get("https://localhost:7124/GetAddress"
-    , { params: { courtId: courtIdToFind } });
+      , { params: { courtId: courtIdToFind } });
     return result.data
   }
-  async function GetGameDetails(gameDetailsToFind){
+  async function GetGameDetails(gameDetailsToFind) {
     const result = await axios.get("https://localhost:7124/GetAllGameUsers"
-    , { params: { gameId: gameDetailsToFind } });
+      , { params: { gameId: gameDetailsToFind } });
     return result.data
   }
   async function JoinToGame(gameId) {
     if (token == null) {
       navigate("/login");
-      throw new Error('Token is null'); 
+      throw new Error('Token is null');
     }
-  
+
     try {
       const response = await axios.post(
         'https://localhost:7124/AddUserToGame',
@@ -52,7 +52,6 @@ function GameComponent() {
           }
         }
       );
-  
       // Update the gameDetails state with the latest data
       const updatedGameDetails = await GetGameDetails(gameId);
       setgameDetails((prevGameDetails) => {
@@ -65,7 +64,35 @@ function GameComponent() {
       console.log(error);
     }
   }
-  
+
+  async function LeaveGame(gameId) {
+    try {
+      const response = await axios.delete(
+        'https://localhost:7124/DeleteUserFromGame',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          data: {
+            gameId: gameId,
+            userId: JSON.parse(localStorage.getItem('userId'))
+          }
+        }
+      );
+      // Update the gameDetails state with the latest data
+      const updatedGameDetails = await GetGameDetails(gameId);
+      setgameDetails((prevGameDetails) => {
+        const updatedDetails = [...prevGameDetails];
+        const gameIndex = games.findIndex((game) => game.gameId === gameId);
+        updatedDetails[gameIndex] = updatedGameDetails;
+        return updatedDetails;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     (async () => await Load())();
   }, []);
@@ -96,30 +123,40 @@ function GameComponent() {
         </DropdownButton>
       </Stack>
       <div>
-      {games.map((game,index) => {
+        {games.map((game, index) => {
+          const isUserParticipating = gameDetails[index] && gameDetails[index].some(user => user.userId === JSON.parse(localStorage.getItem('userId')));
+
           return (
             <Card className="text-center mb-2">
-            <Card.Header>{game.start.slice(0,10)}</Card.Header>
-      <Card.Body className="d-flex flex-row justify-content-between align-items-center">
-        <Card.Text ><img src={paths[game.sportId]} alt="sport logo" width="150" height="150" ></img></Card.Text>
-        <div className='d-flex flex-column justify-content-around'>
-        <Card.Header>{game.start.slice(10,16).replace('T',' ')} - {game.predictedEnd.slice(10,16).replace('T',' ')} </Card.Header>
-        <Card.Text>Users participating: {gameDetails[index] && `${gameDetails[index].length}`} </Card.Text>
-        <Button onClick={(e)=> {JoinToGame(game.gameId)}} variant="primary">Zapisz się</Button>
-        </div>
-        <div className='m-5'>       
-        <Card.Text>
-          {addresses[index] && `${addresses[index].city}`} 
-        </Card.Text> 
-        <Card.Text>
-          {addresses[index] && `${addresses[index].postalCode}`} 
-        </Card.Text>  
-        <Card.Text>
-          {addresses[index] && `${addresses[index].street}`} 
-        </Card.Text>     
-        </div>
-      </Card.Body> 
-      </Card>
+              <Card.Header>{game.start.slice(0, 10)}</Card.Header>
+              <Card.Body className="d-flex flex-row justify-content-between align-items-center">
+                <Card.Text ><img src={paths[game.sportId]} alt="sport logo" width="150" height="150" ></img></Card.Text>
+                <div className='d-flex flex-column justify-content-around'>
+                  <Card.Header>{game.start.slice(10, 16).replace('T', ' ')} - {game.predictedEnd.slice(10, 16).replace('T', ' ')} </Card.Header>
+                  <Card.Text>Users participating: {gameDetails[index] && `${gameDetails[index].length}`} </Card.Text>
+                  {isUserParticipating ? (
+                    <Button onClick={(e) => { LeaveGame(game.gameId) }} variant="danger">
+                      Wypisz się
+                    </Button>
+                  ) : (
+                    <Button onClick={(e) => { JoinToGame(game.gameId) }} variant="primary">
+                      Zapisz się
+                    </Button>
+                  )}
+                </div>
+                <div className='m-5'>
+                  <Card.Text>
+                    {addresses[index] && `${addresses[index].city}`}
+                  </Card.Text>
+                  <Card.Text>
+                    {addresses[index] && `${addresses[index].postalCode}`}
+                  </Card.Text>
+                  <Card.Text>
+                    {addresses[index] && `${addresses[index].street}`}
+                  </Card.Text>
+                </div>
+              </Card.Body>
+            </Card>
           );
         })}
       </div>
