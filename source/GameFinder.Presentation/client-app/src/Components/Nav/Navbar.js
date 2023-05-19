@@ -8,6 +8,13 @@ import {Link} from 'react-router-dom';
 
 
 export default function NavbarComponent() {
+  const token = JSON.parse(localStorage.getItem('token'));
+   function IsSignedIn(){
+    return token != null;
+  }
+  function Logout(){
+    localStorage.clear();
+  }
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -39,8 +46,22 @@ export default function NavbarComponent() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-        <Nav.Link as={Link} to="/register">Register</Nav.Link>
-        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+        {IsSignedIn() ? 
+        (
+          <>
+            <Button onClick={Logout} variant="outline-danger">Logout</Button>
+          </>
+        )
+        : (
+              <>
+                <Nav.Link as={Link} to="/register">
+                  Register
+                </Nav.Link>
+                <Nav.Link as={Link} to="/login">
+                  Login
+                </Nav.Link>
+              </>
+            )}
         </Nav>
         </Navbar.Collapse>   
       </Container>
