@@ -30,29 +30,41 @@ function GameComponent() {
     , { params: { gameId: gameDetailsToFind } });
     return result.data
   }
-  async function JoinToGame(gameId){
-    if(token==null){
+  async function JoinToGame(gameId) {
+    if (token == null) {
       navigate("/login");
       throw new Error('Token is null'); 
     }
-    try{
-        const response = await axios.post('https://localhost:7124/AddUserToGame',
+  
+    try {
+      const response = await axios.post(
+        'https://localhost:7124/AddUserToGame',
         {
           newGameDetailsDto: {
             userId: JSON.parse(localStorage.getItem('userId')),
             gameId: gameId
-            }},
-            {
-              headers: {
-             'Content-Type': 'application/json',
-              'Authorization' : `Bearer ${token}`}
-          }             
-        ); 
-    }        
-    catch(error){
-        console.log(error);
+          }
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+  
+      // Update the gameDetails state with the latest data
+      const updatedGameDetails = await GetGameDetails(gameId);
+      setgameDetails((prevGameDetails) => {
+        const updatedDetails = [...prevGameDetails];
+        const gameIndex = games.findIndex((game) => game.gameId === gameId);
+        updatedDetails[gameIndex] = updatedGameDetails;
+        return updatedDetails;
+      });
+    } catch (error) {
+      console.log(error);
     }
-}
+  }
   
   useEffect(() => {
     (async () => await Load())();
