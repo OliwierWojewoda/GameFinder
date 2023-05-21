@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import api from '../api/GameFinder'
+import api from '../../api/GameFinder'
 import { useEffect, useState } from "react";
  
 function UsersListComponent() {
