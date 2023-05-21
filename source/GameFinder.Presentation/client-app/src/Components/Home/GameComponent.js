@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from '../api/GameFinder'
 import { useEffect, useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -21,12 +21,12 @@ function GameComponent() {
   const token = JSON.parse(localStorage.getItem('token'));
 
   async function FindAddress(courtIdToFind) {
-    const result = await axios.get("https://localhost:7124/GetAddress"
+    const result = await api.get("/GetAddress"
       , { params: { courtId: courtIdToFind } });
     return result.data
   }
   async function GetGameDetails(gameDetailsToFind) {
-    const result = await axios.get("https://localhost:7124/GetAllGameUsers"
+    const result = await api.get("/GetAllGameUsers"
       , { params: { gameId: gameDetailsToFind } });
     return result.data
   }
@@ -37,8 +37,8 @@ function GameComponent() {
     }
 
     try {
-      const response = await axios.post(
-        'https://localhost:7124/AddUserToGame',
+      const response = await api.post(
+        '/AddUserToGame',
         {
           newGameDetailsDto: {
             userId: JSON.parse(localStorage.getItem('userId')),
@@ -67,8 +67,8 @@ function GameComponent() {
 
   async function LeaveGame(gameId) {
     try {
-      const response = await axios.delete(
-        'https://localhost:7124/DeleteUserFromGame',
+      const response = await api.delete(
+        '/DeleteUserFromGame',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ function GameComponent() {
   }, []);
 
   async function Load() {
-    const result = await axios.get("https://localhost:7124/GetAllGames");
+    const result = await api.get("/GetAllGames");
     setGame(result.data);
     const addressesres = await Promise.all(result.data.map(game => FindAddress(game.courtId)));
     const gameDetailsres = await Promise.all(result.data.map(game => GetGameDetails(game.gameId)));

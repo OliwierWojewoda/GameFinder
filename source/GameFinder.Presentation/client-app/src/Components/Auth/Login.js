@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
-import axios from "axios";
+import api from '../api/GameFinder'
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
     const handleSubmit = async (e) => {
       e.preventDefault();
         try{
-            const response = await axios.post('https://localhost:7124/Login',
+            const response = await api.post('/Login',
             {
                 user: {
                   email: email,

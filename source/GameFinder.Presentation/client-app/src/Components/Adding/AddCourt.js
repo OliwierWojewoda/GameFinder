@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
-import axios from "axios";
+import api from '../api/GameFinder'
 
 
 function AddCourt() {
@@ -13,7 +13,7 @@ function AddCourt() {
     const handleSubmit = async (e) => {
         try{
            console.log(token)
-            const response = await axios.post('https://localhost:7124/AddCourt',
+            const response = await api.post('/AddCourt',
             {
                 newCourtDto: {
                     city: city,

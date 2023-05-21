@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
-import axios from "axios";
+import api from '../api/GameFinder'
 import { useNavigate } from "react-router-dom";
 
 function Register() {
@@ -16,7 +16,7 @@ function Register() {
     const handleSubmit = async (e) => {
       e.preventDefault();
         try{
-            const response = await axios.post('https://localhost:7124/Register',
+            const response = await api.post('/Register',
             {
                 newUser: {
                   email: email,

@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
-import axios from "axios";
+import api from '../api/GameFinder'
 
 
 function Addgame() {
@@ -11,7 +11,7 @@ function Addgame() {
     const [courtId, setCourtId] = useState('');
     const handleSubmit = async (e) => {
         try{
-            const response = await axios.post('https://localhost:7124/AddGame',
+            const response = await api.post('/AddGame',
             {
                 newGameDto: {
                     sportId: sportId,

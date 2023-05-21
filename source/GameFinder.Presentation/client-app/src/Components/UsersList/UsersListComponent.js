@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import axios from "axios";
+import api from '../api/GameFinder'
 import { useEffect, useState } from "react";
  
 function UsersListComponent() {
@@ -14,7 +14,7 @@ function UsersListComponent() {
     (async () => await Load())();
   }, []);
   async function Load() {
-    const result = await axios.get("https://localhost:7124/GetAllUsers");
+    const result = await api.get("/GetAllUsers");
     setUsers(result.data);
   } 
     return (
