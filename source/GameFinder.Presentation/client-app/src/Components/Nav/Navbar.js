@@ -5,16 +5,24 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from 'react-router-dom';
-
+import { useEffect, useState } from "react";
 
 export default function NavbarComponent() {
-  const token = JSON.parse(localStorage.getItem('token'));
+  const [token, setToken] = useState(null);
    function IsSignedIn(){
     return token != null;
   }
-  function Logout(){
+  async function Logout(){
     localStorage.clear();
+    setToken(await JSON.parse(localStorage.getItem('token')))
   }
+   async function Load() {
+    setToken(await JSON.parse(localStorage.getItem('token')))
+  }
+  useEffect(() => { 
+    (async () =>  Load())();
+  }, [token]);
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>

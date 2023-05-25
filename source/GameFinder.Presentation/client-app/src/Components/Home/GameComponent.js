@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function GameComponent() {
   const navigate = useNavigate();
-  const [games, setGame] = useState([]);
+  const [games, setGames] = useState([]);
   const paths = {
     '1': require('../Images/1.jpg'),
     '2': require('../Images/2.jpg'),
@@ -18,6 +18,10 @@ function GameComponent() {
   }
   const [addresses, setAddresses] = useState([]);
   const [gameDetails, setgameDetails] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedGameType, setSelectedGameType] = useState(null);
+
+
   const token = JSON.parse(localStorage.getItem('token'));
 
   async function FindAddress(courtIdToFind) {
@@ -94,33 +98,61 @@ function GameComponent() {
   }
 
   useEffect(() => {
-    (async () => await Load())();
+    (async () => {
+      await Load();
+    })();
   }, []);
 
-  async function Load() {
+  async function Load(city, gameType) {
     const result = await api.get("/GetAllGames");
-    setGame(result.data);
-    const addressesres = await Promise.all(result.data.map(game => FindAddress(game.courtId)));
-    const gameDetailsres = await Promise.all(result.data.map(game => GetGameDetails(game.gameId)));
-    console.log(Promise.all(result.data.map(game => GetGameDetails(game.gameId))));
-    setAddresses(addressesres);
-    setgameDetails(gameDetailsres);
+    let filteredGames = result.data;
+   setSelectedCity(city)
+   setSelectedGameType(gameType)
+    const addressesRes = await Promise.all(filteredGames.map(game => FindAddress(game.courtId)));
+    setAddresses(addressesRes);
+ 
+    if (city) {
+      filteredGames = filteredGames.filter((game, index) => {
+        return addressesRes[index] && addressesRes[index].city === city;
+      });
+    }
+  
+    if (gameType) {
+      filteredGames = filteredGames.filter(game => String(game.sportId) === gameType);
+    }
+  
+    const gameDetailsRes = await Promise.all(filteredGames.map(game => GetGameDetails(game.gameId)));
+    const addressesRes2 = await Promise.all(filteredGames.map(game => FindAddress(game.courtId)));
+    setGames(filteredGames);
+    setAddresses(addressesRes2);
+    setgameDetails(gameDetailsRes);
   }
-
   return (
     <div>
       <h1 className='m-2'>Upcoming Games</h1>
       <Stack direction="horizontal" gap={5} className='justify-content-center mb-2'>
-        <DropdownButton id="dropdown-basic-button" title="Select City">
-          <Dropdown.Item href="#/action-1">Katowice</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Chorzów</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Ruda Śląska</Dropdown.Item>
-        </DropdownButton>
-        <DropdownButton id="dropdown-basic-button" title="Select Sport">
-          <Dropdown.Item href="#/action-1">Piłka Nożna</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Koszykówka</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Piłka ręczna</Dropdown.Item>
-        </DropdownButton>
+      <DropdownButton
+  onSelect={(eventKey) => Load(eventKey, selectedGameType)}
+  id="dropdown-city"
+  title={selectedCity ? selectedCity : "Select City"}
+>
+  <Dropdown.Item eventKey={null}>Wszystkie</Dropdown.Item>
+  <Dropdown.Item eventKey="Katowice">Katowice</Dropdown.Item>
+  <Dropdown.Item eventKey="Chorzów">Chorzów</Dropdown.Item>
+  <Dropdown.Item eventKey="Ruda Śląska">Ruda Śląska</Dropdown.Item>
+</DropdownButton>
+
+<DropdownButton
+  onSelect={(eventKey) => Load(selectedCity, eventKey)}
+  id="dropdown-game-type"
+  title={selectedGameType ? selectedGameType : "Select Sport"}
+>
+  <Dropdown.Item eventKey={null}>Wszystkie</Dropdown.Item>
+  <Dropdown.Item eventKey={1}>Piłka Nożna</Dropdown.Item>
+  <Dropdown.Item eventKey={2}>Koszykówka</Dropdown.Item>
+  <Dropdown.Item eventKey={3}>Siatkowka</Dropdown.Item>
+  <Dropdown.Item eventKey={4}>Tenis</Dropdown.Item>
+</DropdownButton>
       </Stack>
       <div>
         {games.map((game, index) => {

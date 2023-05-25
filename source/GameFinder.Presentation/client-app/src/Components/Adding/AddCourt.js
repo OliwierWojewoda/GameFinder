@@ -10,9 +10,9 @@ function AddCourt() {
     const [postalCode, setPostalCode] = useState('');
     const [courtType, setCourtType] = useState('');
     const token = JSON.parse(localStorage.getItem('token'));
+    
     const handleSubmit = async (e) => {
         try{
-           console.log(token)
             const response = await api.post('/AddCourt',
             {
                 newCourtDto: {
