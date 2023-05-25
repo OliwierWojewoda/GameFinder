@@ -16,7 +16,6 @@ Application created to help find games in your city.
 
 - zrobić komunikaty dla usera 
 
-- homepage zrobić filtorwanie po miescie i grze
 - sortowania
 - search bar
 - rankingi i statystki jakies wymyslic
@@ -26,5 +25,5 @@ Application created to help find games in your city.
 - wybor boiska przy tworzeniu gry 
 
 - zrobic jakis panel dla admina
-- signed in /  logout zrobic globalny authprovider
+- signed in update navbara (zrobic globalny authprovider)
 - zrobic w api token wszedzie sporawdzanie
