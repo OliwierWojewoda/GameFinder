@@ -106,30 +106,29 @@ function GameComponent() {
 
   async function Load(city, gameType) {
     let result;
-    if(searchQuery)
-    {
+    if (searchQuery) {
       result = await api.get("/GetAllGamesFromQuery", { params: { search: searchQuery } });
       console.log('elo')
     }
-    else{
-       result = await api.get("/GetAllGames");
-    }   
+    else {
+      result = await api.get("/GetAllGames");
+    }
     let filteredGames = result.data;
-   setSelectedCity(city)
-   setSelectedGameType(gameType)
+    setSelectedCity(city)
+    setSelectedGameType(gameType)
     const addressesRes = await Promise.all(filteredGames.map(game => FindAddress(game.courtId)));
     setAddresses(addressesRes);
- 
+
     if (city) {
       filteredGames = filteredGames.filter((game, index) => {
         return addressesRes[index] && addressesRes[index].city === city;
       });
     }
-  
+
     if (gameType) {
       filteredGames = filteredGames.filter(game => String(game.sportId) === gameType);
     }
-  
+
     const gameDetailsRes = await Promise.all(filteredGames.map(game => GetGameDetails(game.gameId)));
     const addressesRes2 = await Promise.all(filteredGames.map(game => FindAddress(game.courtId)));
     setGames(filteredGames);
@@ -149,28 +148,28 @@ function GameComponent() {
         />
       </Form>
       <Stack direction="horizontal" gap={5} className='justify-content-center mb-2'>
-      <DropdownButton
-  onSelect={(eventKey) => Load(eventKey, selectedGameType)}
-  id="dropdown-city"
-  title={selectedCity ? selectedCity : "Select City"}
->
-  <Dropdown.Item eventKey={null}>All</Dropdown.Item>
-  <Dropdown.Item eventKey="Katowice">Katowice</Dropdown.Item>
-  <Dropdown.Item eventKey="Chorzów">Chorzów</Dropdown.Item>
-  <Dropdown.Item eventKey="Ruda Śląska">Ruda Śląska</Dropdown.Item>
-</DropdownButton>
+        <DropdownButton
+          onSelect={(eventKey) => Load(eventKey, selectedGameType)}
+          id="dropdown-city"
+          title={selectedCity ? selectedCity : "Select City"}
+        >
+          <Dropdown.Item eventKey={null}>All</Dropdown.Item>
+          <Dropdown.Item eventKey="Katowice">Katowice</Dropdown.Item>
+          <Dropdown.Item eventKey="Chorzów">Chorzów</Dropdown.Item>
+          <Dropdown.Item eventKey="Ruda Śląska">Ruda Śląska</Dropdown.Item>
+        </DropdownButton>
 
-<DropdownButton
-  onSelect={(eventKey) => Load(selectedCity, eventKey)}
-  id="dropdown-game-type"
-  title={selectedGameType ? selectedGameType : "Select Sport"}
->
-  <Dropdown.Item eventKey={null}>All</Dropdown.Item>
-  <Dropdown.Item eventKey={1}>Piłka Nożna</Dropdown.Item>
-  <Dropdown.Item eventKey={2}>Koszykówka</Dropdown.Item>
-  <Dropdown.Item eventKey={3}>Siatkowka</Dropdown.Item>
-  <Dropdown.Item eventKey={4}>Tenis</Dropdown.Item>
-</DropdownButton>
+        <DropdownButton
+          onSelect={(eventKey) => Load(selectedCity, eventKey)}
+          id="dropdown-game-type"
+          title={selectedGameType ? selectedGameType : "Select Sport"}
+        >
+          <Dropdown.Item eventKey={null}>All</Dropdown.Item>
+          <Dropdown.Item eventKey={1}>Piłka Nożna</Dropdown.Item>
+          <Dropdown.Item eventKey={2}>Koszykówka</Dropdown.Item>
+          <Dropdown.Item eventKey={3}>Siatkowka</Dropdown.Item>
+          <Dropdown.Item eventKey={4}>Tenis</Dropdown.Item>
+        </DropdownButton>
       </Stack>
       <div>
         {games.map((game, index) => {
@@ -194,16 +193,16 @@ function GameComponent() {
                     </Button>
                   )}
                 </div>
-                <div className='m-5'>
-                  <Card.Text>
-                    {addresses[index] && `${addresses[index].city}`}
-                  </Card.Text>
-                  <Card.Text>
-                    {addresses[index] && `${addresses[index].postalCode}`}
-                  </Card.Text>
-                  <Card.Text>
-                    {addresses[index] && `${addresses[index].street}`}
-                  </Card.Text>
+                <div style={{ width: '150px' }}>
+                    <Card.Text>
+                      {addresses[index] && `${addresses[index].city}`}
+                    </Card.Text>
+                    <Card.Text>
+                      {addresses[index] && `${addresses[index].postalCode}`}
+                    </Card.Text>
+                    <Card.Text>
+                      {addresses[index] && `${addresses[index].street}`}
+                    </Card.Text>
                 </div>
               </Card.Body>
             </Card>
