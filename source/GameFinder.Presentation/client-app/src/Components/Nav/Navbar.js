@@ -39,16 +39,7 @@ export default function NavbarComponent() {
             <Nav.Link as={Link} to="/users">Players</Nav.Link>
             <Nav.Link as={Link} to="/addgame">Create game</Nav.Link>
             <Nav.Link as={Link} to="/addcourt">Add Court</Nav.Link>
-          </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          </Nav>         
           <Nav
             className=""
             style={{ maxHeight: '100px' }}
