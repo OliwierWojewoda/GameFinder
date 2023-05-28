@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
 
 function GameComponent() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function GameComponent() {
   const [gameDetails, setgameDetails] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedGameType, setSelectedGameType] = useState(null);
-
+  const [searchQuery, setSearchQuery] = useState(null);
 
   const token = JSON.parse(localStorage.getItem('token'));
 
@@ -101,10 +102,18 @@ function GameComponent() {
     (async () => {
       await Load();
     })();
-  }, []);
+  }, [searchQuery]);
 
   async function Load(city, gameType) {
-    const result = await api.get("/GetAllGames");
+    let result;
+    if(searchQuery)
+    {
+      result = await api.get("/GetAllGamesFromQuery", { params: { search: searchQuery } });
+      console.log('elo')
+    }
+    else{
+       result = await api.get("/GetAllGames");
+    }   
     let filteredGames = result.data;
    setSelectedCity(city)
    setSelectedGameType(gameType)
@@ -130,13 +139,22 @@ function GameComponent() {
   return (
     <div>
       <h1 className='m-2'>Upcoming Games</h1>
+      <Form className="d-flex ">
+        <Form.Control
+          type="search"
+          placeholder="Search address"
+          className="m-2"
+          aria-label="Search"
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+      </Form>
       <Stack direction="horizontal" gap={5} className='justify-content-center mb-2'>
       <DropdownButton
   onSelect={(eventKey) => Load(eventKey, selectedGameType)}
   id="dropdown-city"
   title={selectedCity ? selectedCity : "Select City"}
 >
-  <Dropdown.Item eventKey={null}>Wszystkie</Dropdown.Item>
+  <Dropdown.Item eventKey={null}>All</Dropdown.Item>
   <Dropdown.Item eventKey="Katowice">Katowice</Dropdown.Item>
   <Dropdown.Item eventKey="Chorzów">Chorzów</Dropdown.Item>
   <Dropdown.Item eventKey="Ruda Śląska">Ruda Śląska</Dropdown.Item>
@@ -147,7 +165,7 @@ function GameComponent() {
   id="dropdown-game-type"
   title={selectedGameType ? selectedGameType : "Select Sport"}
 >
-  <Dropdown.Item eventKey={null}>Wszystkie</Dropdown.Item>
+  <Dropdown.Item eventKey={null}>All</Dropdown.Item>
   <Dropdown.Item eventKey={1}>Piłka Nożna</Dropdown.Item>
   <Dropdown.Item eventKey={2}>Koszykówka</Dropdown.Item>
   <Dropdown.Item eventKey={3}>Siatkowka</Dropdown.Item>
@@ -168,11 +186,11 @@ function GameComponent() {
                   <Card.Text>Users participating: {gameDetails[index] && `${gameDetails[index].length}`} </Card.Text>
                   {isUserParticipating ? (
                     <Button onClick={(e) => { LeaveGame(game.gameId) }} variant="danger">
-                      Wypisz się
+                      Leave
                     </Button>
                   ) : (
                     <Button onClick={(e) => { JoinToGame(game.gameId) }} variant="primary">
-                      Zapisz się
+                      Join
                     </Button>
                   )}
                 </div>
