@@ -52,7 +52,7 @@ namespace GameFinder.Presentation.Controllers
         }
 
         [HttpPost("/Logout")]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
             Response.Cookies.Delete("jwt");
 
