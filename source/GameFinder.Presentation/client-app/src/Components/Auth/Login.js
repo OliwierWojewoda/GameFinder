@@ -1,38 +1,36 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {useState} from "react";
+import { useState } from "react";
 import api from '../../api/GameFinder'
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-    const [password, setPwd] = useState('');
-    const [email, setEmail] = useState('');
-    const navigate = useNavigate();
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-        try{
-            const response = await api.post('/Login',
-            {
-                user: {
-                  email: email,
-                  password: password
-                }},
-                {
-                    headers: { 'Content-Type': 'application/json' }
-                }              
-            ); 
-            const token = JSON.stringify(response.data.token);
-            const userId = JSON.stringify(response.data.userId);
-      
-            localStorage.setItem('token', token);
-            localStorage.setItem('userId', userId);
+  const [password, setPwd] = useState('');
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
-            navigate("/")
-        }        
-        catch(error){
-            console.log(error);
-        }     
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.post(
+        '/Login',
+        {
+          user: {
+            email: email,
+            password: password
+          }
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true // Include credentials in the request
+        }
+      );
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
     }
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
