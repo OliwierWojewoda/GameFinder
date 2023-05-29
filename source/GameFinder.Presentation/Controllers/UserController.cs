@@ -7,6 +7,7 @@ using GameFinder.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace GameFinder.Presentation.Controllers
@@ -32,10 +33,37 @@ namespace GameFinder.Presentation.Controllers
         public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
+            Response.Cookies.Append("jwt", result.Token, new CookieOptions
+            {
+                HttpOnly = true
+            });
             return Ok(result);
         }
+        [HttpGet("/GetUser")]
+        public async Task<IActionResult> GetUser()
+        {
+            var jwtToken = Request.Cookies["jwt"];
+            var commandWithToken = new GetUserCommand()
+            {
+                JwtToken = jwtToken
+            };
+            var result = await _mediator.Send(commandWithToken);
+            return Ok(result);
+        }
+
+        [HttpPost("/Logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt");
+
+            return Ok(new
+            {
+                message = "success"
+            });
+        }
+
         [HttpGet("/GetAllUsers")]
-        public async Task<IActionResult> Login([FromQuery] GetAllUsersCommand command)
+        public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
