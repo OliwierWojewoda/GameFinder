@@ -10,6 +10,7 @@ function Addgame() {
     const [predictedEnd, setPredictedEnd] = useState('');
     const [courtId, setCourtId] = useState('');
     const [courts, setCourts] = useState([])
+    const token = JSON.parse(localStorage.getItem('token'));
     const handleSubmit = async (e) => {
         try{
             const response = await api.post('/AddGame',
@@ -21,8 +22,10 @@ function Addgame() {
                     courtId: courtId,
                 }},
                 {
-                    headers: { 'Content-Type': 'application/json' }
-                }              
+                  headers: {
+                    'Content-Type': 'application/json',
+                     'Authorization' : `Bearer ${token}`}
+                 }                 
             ); 
         }        
         catch(error){

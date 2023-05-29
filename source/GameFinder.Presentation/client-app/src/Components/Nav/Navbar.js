@@ -14,6 +14,24 @@ export default function NavbarComponent() {
    function IsSignedIn(){
     return token != null;
   }
+  async function getUserData() {
+  try {
+    const response = await api.get('/GetUser', {
+      headers: {
+        Authorization: `Bearer ${token}` // set the token in the request headers
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Error retrieving user data');
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
   async function Logout(){
     localStorage.clear();
     setToken(await JSON.parse(localStorage.getItem('token')))
@@ -21,8 +39,10 @@ export default function NavbarComponent() {
    async function Load() {
     setToken(await JSON.parse(localStorage.getItem('token')))
   }
-  useEffect(() => { 
-    (async () =>  Load())();
+  useEffect(() => {
+    (async () => {
+      await Load();
+    })();
   }, [token]);
 
   return (
