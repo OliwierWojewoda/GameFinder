@@ -35,7 +35,9 @@ namespace GameFinder.Presentation.Controllers
             var result = await _mediator.Send(command);
             Response.Cookies.Append("jwt", result.Token, new CookieOptions
             {
-                HttpOnly = true
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true  // Make sure to set Secure to true when using HTTPS
             });
             return Ok(result);
         }
