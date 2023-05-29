@@ -11,26 +11,19 @@ import api from '../../api/GameFinder'
 
 export default function NavbarComponent() {
   const [token, setToken] = useState(null);
-
-  function IsSignedIn() {
-    return token !== null;
+   function IsSignedIn(){
+    return token != null;
   }
-
-  async function Logout() {
-    await api.post('/Logout', {}, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    });
-  
-    Cookies.remove('jwt');
-    setToken(null);
+  async function Logout(){
+    localStorage.clear();
+    setToken(await JSON.parse(localStorage.getItem('token')))
   }
-
-  useEffect(() => {
-    const loadedToken = Cookies.get('jwt');
-    setToken(loadedToken);
-    console.log(loadedToken);
-  }, []);
+   async function Load() {
+    setToken(await JSON.parse(localStorage.getItem('token')))
+  }
+  useEffect(() => { 
+    (async () =>  Load())();
+  }, [token]);
 
   return (
     <Navbar bg="light" expand="lg">

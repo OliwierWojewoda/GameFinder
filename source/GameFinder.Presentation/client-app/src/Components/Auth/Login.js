@@ -25,6 +25,11 @@ function Login() {
           withCredentials: true // Include credentials in the request
         }
       );
+      const token = JSON.stringify(response.data.token);
+            const userId = JSON.stringify(response.data.userId);
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', userId);
 
       navigate("/");
     } catch (error) {
