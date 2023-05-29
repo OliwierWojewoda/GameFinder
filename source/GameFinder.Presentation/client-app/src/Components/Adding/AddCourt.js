@@ -50,7 +50,7 @@ function AddCourt() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="courtType">
         <Form.Label>Court Type</Form.Label>
-        <Form.Control value={courtType} onChange={(e) => setCourtType(e.target.value)} type="text" placeholder="Court Type" />
+        <Form.Control value={courtType} onChange={(e) => setCourtType(e.target.value)} type="text" placeholder="1 or 2" />
       </Form.Group>   
       <Button variant="primary" type="submit">
         Submit
