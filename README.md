@@ -15,15 +15,8 @@ Application created to help find games in your city.
 # Do zrobienia
 
 - zrobić komunikaty dla usera 
-
-- sortowania
-- search bar
 - rankingi i statystki jakies wymyslic
-
-- walidacja przy tworzeniu gier i poprawic wybieranie godziny
-- walidacja przy tworzeniu boiska
-- wybor boiska przy tworzeniu gry 
-
-- zrobic jakis panel dla admina
+- zrobic jakis panel dla admina usuwanie gier boisko itp
 - signed in update navbara (zrobic globalny authprovider)
-- zrobic w api token wszedzie sporawdzanie
+- zrobic sprawdzenie rol w backend
+
