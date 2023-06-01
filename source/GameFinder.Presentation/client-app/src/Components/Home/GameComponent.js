@@ -22,9 +22,31 @@ function GameComponent() {
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedGameType, setSelectedGameType] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
-
+  const [selectedGameTypeName, setSelectedGameTypeName] = useState("Select Sport");
   const token = JSON.parse(localStorage.getItem('token'));
 
+  const getSportName = (gameType) => {
+    switch (gameType) {
+      case 1:
+        return "Piłka Nożna";
+      case 2:
+        return "Koszykówka";
+      case 3:
+        return "Siatkówka";
+      case 4:
+        return "Tenis";
+      default:
+        return "Select Sport";
+    }
+  };
+  const handleGameTypeSelect = (eventKey) => {
+    const sportId = parseInt(eventKey); // Convert eventKey to an integer
+    const sportName = getSportName(sportId); // Get the sport name based on the selected event key
+    setSelectedGameType(sportId);
+    setSelectedGameTypeName(sportName); // Update the selected sport name
+    Load(selectedCity, String(sportId));
+  };
+  
   async function FindAddress(courtIdToFind) {
     const result = await api.get("/GetAddress"
       , { params: { courtId: courtIdToFind } });
@@ -160,9 +182,9 @@ function GameComponent() {
         </DropdownButton>
 
         <DropdownButton
-          onSelect={(eventKey) => Load(selectedCity, eventKey)}
+          onSelect={handleGameTypeSelect}
           id="dropdown-game-type"
-          title={selectedGameType ? selectedGameType : "Select Sport"}
+          title={selectedGameTypeName}
         >
           <Dropdown.Item eventKey={null}>All</Dropdown.Item>
           <Dropdown.Item eventKey={1}>Piłka Nożna</Dropdown.Item>

@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import api from '../../api/GameFinder'
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarComponent() {
-  const [token, setToken] = useState(null);
+  const token = JSON.parse(localStorage.getItem('token'))
+  const navigate = useNavigate();
    function IsSignedIn(){
     return token != null;
   }
@@ -34,16 +36,8 @@ export default function NavbarComponent() {
 }
   async function Logout(){
     localStorage.clear();
-    setToken(await JSON.parse(localStorage.getItem('token')))
+    navigate("login");
   }
-   async function Load() {
-    setToken(await JSON.parse(localStorage.getItem('token')))
-  }
-  useEffect(() => {
-    (async () => {
-      await Load();
-    })();
-  }, [token]);
 
   return (
     <Navbar bg="light" expand="lg">
@@ -67,7 +61,8 @@ export default function NavbarComponent() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            {IsSignedIn() ? (
+            {
+            token ? (
               <>
                 <Button onClick={Logout} variant="outline-danger">Logout</Button>
               </>
