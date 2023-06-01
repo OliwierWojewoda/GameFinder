@@ -14,8 +14,6 @@ Application created to help find games in your city.
 
 # Do zrobienia
 
-- zrobić komunikaty dla usera 
-- rankingi i statystki
-- zrobic jakis panel dla admina usuwanie gier boisko itp
-- signed in update navbara (zrobic globalny authprovider)
+- rankingi i statystki jakies wymyslic, jakies triggery zeby stasiu zadowlony byl
+- zrobic jakis panel dla admina usuwanie gier boisko (w sumie po co)
 
