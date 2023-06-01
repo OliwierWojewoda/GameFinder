@@ -9,15 +9,16 @@ import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {getSportName} from './Helpers/getSportName';
 
 function GameComponent() {
   const navigate = useNavigate();
   const [games, setGames] = useState([]);
   const paths = {
-    '1': require('../Images/1.jpg'),
-    '2': require('../Images/2.jpg'),
-    '3': require('../Images/3.jpg'),
-    '4': require('../Images/4.jpg'),
+    '1': require('../../Images/1.jpg'),
+    '2': require('../../Images/2.jpg'),
+    '3': require('../../Images/3.jpg'),
+    '4': require('../../Images/4.jpg'),
   }
   const [addresses, setAddresses] = useState([]);
   const [gameDetails, setgameDetails] = useState([]);
@@ -27,20 +28,6 @@ function GameComponent() {
   const [selectedGameTypeName, setSelectedGameTypeName] = useState("Select Sport");
   const token = JSON.parse(localStorage.getItem('token'));
 
-  const getSportName = (gameType) => {
-    switch (gameType) {
-      case 1:
-        return "Piłka Nożna";
-      case 2:
-        return "Koszykówka";
-      case 3:
-        return "Siatkówka";
-      case 4:
-        return "Tenis";
-      default:
-        return "Select Sport";
-    }
-  };
   const handleGameTypeSelect = (eventKey) => {
     const sportId = parseInt(eventKey); // Convert eventKey to an integer
     const sportName = getSportName(sportId); // Get the sport name based on the selected event key
