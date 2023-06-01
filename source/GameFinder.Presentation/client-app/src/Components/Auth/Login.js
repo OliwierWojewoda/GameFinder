@@ -24,14 +24,15 @@ function Login() {
         },
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true // Include credentials in the request
+          withCredentials: true
         }
       );
-      const token = JSON.stringify(response.data.token);
-            const userId = JSON.stringify(response.data.userId);
 
-            localStorage.setItem('token', token);
-            localStorage.setItem('userId', userId);
+      /// save user data
+      const token = JSON.stringify(response.data.token);
+      const userId = JSON.stringify(response.data.userId);
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
 
       navigate("/");
     } catch (error) {   

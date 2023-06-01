@@ -15,6 +15,7 @@ function Register() {
     const [phone, setPhone] = useState('');
     const [birthdate, setBirthDate] = useState('');
     const [role, setRole] = useState('');
+    
     const handleSubmit = async (e) => {
       e.preventDefault();
         try{
