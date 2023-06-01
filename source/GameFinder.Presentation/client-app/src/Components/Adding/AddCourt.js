@@ -2,7 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import api from '../../api/GameFinder'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddCourt() {
     const [city, setCity] = useState('');
@@ -12,6 +13,7 @@ function AddCourt() {
     const token = JSON.parse(localStorage.getItem('token'));
     
     const handleSubmit = async (e) => {
+      e.preventDefault();
         try{
             const response = await api.post('/AddCourt',
             {
@@ -29,6 +31,7 @@ function AddCourt() {
             );  
         }        
         catch(error){
+          toast.error("Coś poszło nie tak")
             console.log(error);
         }
     }
@@ -55,6 +58,7 @@ function AddCourt() {
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      <ToastContainer />
     </Form>
     </div>
   );

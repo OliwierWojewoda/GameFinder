@@ -2,7 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState,useEffect} from "react";
 import api from '../../api/GameFinder'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Addgame() {
     const [sportId, setSportId] = useState('');
@@ -12,6 +13,7 @@ function Addgame() {
     const [courts, setCourts] = useState([])
     const token = JSON.parse(localStorage.getItem('token'));
     const handleSubmit = async (e) => {
+      e.preventDefault();
         try{
             const response = await api.post('/AddGame',
             {
@@ -29,6 +31,7 @@ function Addgame() {
             ); 
         }        
         catch(error){
+          toast.error("Coś poszło nie tak")
             console.log(error);
         }
     }
@@ -79,6 +82,7 @@ function Addgame() {
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      <ToastContainer />
     </Form>
     </div>
   );

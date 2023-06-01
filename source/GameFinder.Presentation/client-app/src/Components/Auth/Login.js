@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 import api from '../../api/GameFinder'
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [password, setPwd] = useState('');
@@ -32,7 +34,8 @@ function Login() {
             localStorage.setItem('userId', userId);
 
       navigate("/");
-    } catch (error) {
+    } catch (error) {   
+      toast.error("Niepoprawne dane logowania")  
       console.log(error);
     }
   }
@@ -51,7 +54,9 @@ function Login() {
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      <ToastContainer />
     </Form>
+    
   );
 }
 

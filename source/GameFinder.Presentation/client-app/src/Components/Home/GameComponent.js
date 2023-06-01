@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function GameComponent() {
   const navigate = useNavigate();
@@ -58,7 +60,7 @@ function GameComponent() {
     return result.data
   }
   async function JoinToGame(gameId) {
-    if (token == null) {
+    if (token == null) {  
       navigate("/login");
       throw new Error('Token is null');
     }
@@ -87,6 +89,7 @@ function GameComponent() {
         updatedDetails[gameIndex] = updatedGameDetails;
         return updatedDetails;
       });
+      toast.success("Dołączyłeś do gry")
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +118,7 @@ function GameComponent() {
         updatedDetails[gameIndex] = updatedGameDetails;
         return updatedDetails;
       });
+      toast.success("Opuściłeś grę")
     } catch (error) {
       console.log(error);
     }
@@ -214,6 +218,7 @@ function GameComponent() {
                       Join
                     </Button>
                   )}
+                  <ToastContainer />
                 </div>
                 <div style={{ width: '150px' }}>
                     <Card.Text>
@@ -232,6 +237,7 @@ function GameComponent() {
         })}
       </div>
     </div>
+    
   );
 }
 
