@@ -31,7 +31,7 @@ BEGIN
            ,[Message]
            ,[IsSent]
            ,[UserId])
-		   select i.Email, 'Greetings from GameFINDER Team', 'WELCOME TO GameFINDER',0, i.UserId
+		   select i.Email, 'Greetings from GameFinder Team', 'Welcome to GameFinder, we hope you will find lot of games here!',0, i.UserId
     
     FROM inserted i;
 END;
