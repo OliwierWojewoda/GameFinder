@@ -10,7 +10,6 @@ namespace GameFinder.Domain.Exceptions
     {
         public GamesOnCourtException(string message = "Cannot delete court with games!") : base(message)
         {
-
         }
     }
 }
